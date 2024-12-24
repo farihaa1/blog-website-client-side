@@ -9,3 +9,6 @@ Add a list of your pages here.
 ### NPM Packages
 
 - **sweetalert2**: Used for toast notifications.
+- **axios**: .
+- **framer-motion**: .
+- **react-lottie**: .
