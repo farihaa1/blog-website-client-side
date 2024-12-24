@@ -6,6 +6,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
+  console.log(user)
 
   const [loading, setLoading] = useState(false);
 
@@ -18,34 +19,31 @@ const RegisterPage = () => {
     const photo = form.photo.value;
     const password = form.password.value;
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-    if (!passwordRegex.test(password)) {
+    const fullPasswordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{6,}$/;
+    if (!fullPasswordRegex.test(password)) {
       Swal.fire({
         icon: "warning",
         title: "Weak Password",
-        text: "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long.",
+        text: "Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 6 characters long.",
       });
       setLoading(false);
       return;
     }
 
     createUser(email, password)
-      .then((res) => {
-        const createdUser = res.user;
-
+      .then(() => {
         updateUserProfile(name, photo)
           .then(() => {
             const newUser = { name, email, photo };
 
-            fetch("https://chill-gamer-server-side-jet.vercel.app/users", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(newUser),
-            })
-              .then((response) => response.json())
-              .then((data) => {
-
-                if (data.insertedId) {
+            axios
+              .post(
+                "https://chill-gamer-server-side-jet.vercel.app/users",
+                newUser
+              )
+              .then((res) => {
+                if (res.data.insertedId) {
                   Swal.fire({
                     position: "center",
                     icon: "success",
@@ -93,17 +91,18 @@ const RegisterPage = () => {
   return (
     <div className="hero min-h-screen pt-12 pb-12">
       <div className="hero-content flex-col">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold">Join Our Blogging Community!</h1>
-          <p className="py-6 w-8/12 mx-auto">
-          Create an account to share your stories, interact with other bloggers, and grow your online presence.
+        <div className="text-center pb-2">
+          <h1 className="text-3xl font-bold">Join Our Blogging Community!</h1>
+          <p className="py-5 w-8/12 mx-auto text-text">
+            Create an account to share your stories, interact with other
+            bloggers, and grow your online presence.
           </p>
         </div>
         <div className="card w-full max-w-sm shrink-0 shadow-2xl">
           <form onSubmit={handleRegister} className="card-body">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Name</span>
+                <span className="text-text">Name</span>
               </label>
               <input
                 type="text"
@@ -152,7 +151,9 @@ const RegisterPage = () => {
             <div className="form-control mt-6">
               <button
                 type="submit"
-                className={`btn bg-primary text-white ${loading ? "loading" : ""}`}
+                className={`btn bg-primary text-white ${
+                  loading ? "loading" : ""
+                }`}
                 disabled={loading}
               >
                 {loading ? "Registering..." : "Register"}
@@ -161,7 +162,7 @@ const RegisterPage = () => {
             <label className="label">
               <p className="text-center">
                 Already have an account?{" "}
-                <Link className="text-primary" to="/login">
+                <Link className="text-gradi primary" to="/login">
                   Login
                 </Link>
               </p>

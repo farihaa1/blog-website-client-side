@@ -4,7 +4,7 @@ import Navbar from "../Common/Navbar";
 
 const MainLayout = () => {
     return (
-        <div>
+        <div className="font-poppins bg-bg">
           <nav>
             <Navbar></Navbar>
           </nav>

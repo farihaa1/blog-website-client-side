@@ -15,6 +15,8 @@ export default {
         text: "#323253",
         base: "#87879B",
         bg:"#F9F8FF",
+        black: "#181D14",
+        btn1: "#FF5480"
       },
     },
   },

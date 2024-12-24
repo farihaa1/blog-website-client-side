@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   updateProfile,
   sendPasswordResetEmail,
+  GithubAuthProvider,
 } from "firebase/auth";
 import auth from "../../firebase.init";
 export const AuthContext = createContext();
@@ -16,6 +17,7 @@ const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider()
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password).finally(() => {
@@ -33,6 +35,9 @@ const AuthProviders = ({ children }) => {
 
   const handleGoogleLogin = () => {
     return signInWithPopup(auth, googleProvider);
+  };
+  const handleGithubLogin = () => {
+    return signInWithPopup(auth, githubProvider);
   };
 
   const updateUserProfile = async (name, image) => {
@@ -78,7 +83,8 @@ const AuthProviders = ({ children }) => {
     updateUserProfile,
     resetPassword,
     setLoading,
-    handleGoogleLogin
+    handleGoogleLogin,
+    handleGithubLogin
   };
 
   return (
