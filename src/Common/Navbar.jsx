@@ -49,8 +49,8 @@ const Navbar = () => {
             {Links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl font-bold">
-          <img src="" className="w-10 " alt="" /> Job Portal
+        <a className="btn btn-ghost text-xl md:text-3xl font-bold">
+          <img src="" className="w-10 " alt="" /> Blog Website
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
