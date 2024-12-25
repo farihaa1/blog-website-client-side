@@ -10,36 +10,35 @@ const AllBlogs = () => {
   const [category, setCategory] = useState("All");
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext);
-
-
-  console.log(user)
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchBlogs();
+    setLoading(true);
+    const timeoutId = setTimeout(() => {
+      fetchBlogs();
+    }, 200); 
+
+    return () => clearTimeout(timeoutId);
   }, [search, category]);
 
   const fetchBlogs = async () => {
     try {
-      setLoading(true);
-      const params = {};
-      if (search.trim()) params.search = search.trim();
-      if (category !== "All") params.category = category;
-
-      const res = await axios.get("http://localhost:5000/blogs", { params });
-
-      setBlogs(res.data);
+      const response = await fetch(
+        `http://localhost:5000/blogs?search=${search}&category=${category}`
+      );
+      const data = await response.json();
+      setBlogs(data);
     } catch (error) {
-      console.error("Error fetching blogs:", error.message);
-      Swal.fire({
-        icon: "error",
-        title: "Failed to fetch blogs",
-        text: "There was an issue fetching blogs. Please try again later.",
-      });
+      console.error("Error fetching blogs:", error);
     } finally {
       setLoading(false);
     }
   };
+  
+  
+
+
+ 
 
   const handleAddToWishlist = async (blogId) => {
     if (!user) {
@@ -52,32 +51,41 @@ const AllBlogs = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/wishlist", {
-        userId: user.uid,
-        blogId,
-      });
-
-      Swal.fire({
-        icon: "success",
-        title: "Added to Wishlist",
-        text: "The blog has been added to your wishlist successfully.",
-        timer: 2000,
-        showConfirmButton: false,
-      });
-    } catch (error) {
-      console.error(error);
-      Swal.fire({
-        icon: "error",
-        title: "Failed",
-        text: "There was an error adding the blog to your wishlist.",
-      });
-    }
+        const response = await axios.post("http://localhost:5000/wishlist", {
+          userId: user.uid,
+          blogId,
+        });
+        Swal.fire({
+          icon: "success",
+          title: "Added to Wishlist",
+          text: "The blog has been added to your wishlist successfully.",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      } catch (error) {
+        if (error.response && error.response.status === 409) {
+            Swal.fire({
+              icon: "error",
+              title: "Already Exists",
+              text: "This blog is already in your wishlist.",
+            });
+          } else {
+            console.error("Unexpected error:", error); // Log only unexpected errors
+            Swal.fire({
+              icon: "error",
+              title: "Failed",
+              text: "There was an error adding the blog to your wishlist.",
+            });
+          }
+      }
+      
   };
 
   return (
     <div className="max-w-6xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">All Blogs</h1>
-      {loading && <progress className="progress w-56"></progress>}
+     
+      {/* Search and Category Filter */}
       <div className="flex items-center space-x-4 mb-6">
         <input
           type="text"
@@ -98,10 +106,13 @@ const AllBlogs = () => {
           <option value="Education">Education</option>
         </select>
       </div>
+     {loading && <div className=" flex justify-center items-center h-80 mt-3 mb-6"><progress className="progress w-56"></progress></div>}
+      
 
+      {/* Blog Listings */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs.map((blog) => (
-          <div key={blog._id} className="border rounded p-4 shadow min-h-max">
+          <div key={blog._id} className="border rounded p-4 shadow ">
             <img
               src={blog.imageUrl || "https://via.placeholder.com/150"}
               alt={blog.title || "Blog Image"}

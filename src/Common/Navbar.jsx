@@ -76,7 +76,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/wishlist"
+          to={`/wishlist/${user.uid}`}
           className={({ isActive }) =>
             `px-4 py-2 rounded-lg ${
               isActive ? "bg-btn1 text-white font-semibold" : "text-gray-600"
