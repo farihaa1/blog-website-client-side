@@ -12,3 +12,4 @@ Add a list of your pages here.
 - **axios**: .
 - **framer-motion**: .
 - **react-lottie**: .
+- **react-Icon**: .

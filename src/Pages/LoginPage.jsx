@@ -4,7 +4,13 @@ import { AuthContext } from "../Providers/AuthProvider";
 import googleImg from "../assets/google.png";
 
 const LoginPage = () => {
-  const { loginUser, handleGoogleLogin, loading, setLoading, handleGithubLogin } = useContext(AuthContext);
+  const {
+    loginUser,
+    handleGoogleLogin,
+    loading,
+    setLoading,
+    handleGithubLogin,
+  } = useContext(AuthContext);
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -35,13 +41,17 @@ const LoginPage = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`GitHub API Error: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `GitHub API Error: ${response.status} ${response.statusText}`
+        );
       }
 
       const emails = await response.json();
 
       if (Array.isArray(emails)) {
-        const primaryEmail = emails.find((email) => email.primary && email.verified);
+        const primaryEmail = emails.find(
+          (email) => email.primary && email.verified
+        );
         return primaryEmail?.email || null;
       }
 
@@ -96,7 +106,8 @@ const LoginPage = () => {
         <div className="text-center">
           <h1 className="text-4xl font-bold">Welcome Back!</h1>
           <p className="py-6 w-8/12 mx-auto">
-            Log in to your account to access your dashboard, manage your posts, and interact with the community.
+            Log in to your account to access your dashboard, manage your posts,
+            and interact with the community.
           </p>
         </div>
         <div className="card w-full max-w-sm shrink-0 shadow-2xl">
@@ -132,29 +143,32 @@ const LoginPage = () => {
                   Forgot password?
                 </a>
               </label>
-              {error && <p className="text-red-500 text-center mb-2">{error}</p>}
+              {error && (
+                <p className="text-red-500 text-center mb-2">{error}</p>
+              )}
             </div>
             <div className="form-control mt-6">
               <button className="btn bg-primary text-white">Login</button>
             </div>
           </form>
-          <div className="text-center mt-4">
-            <p>OR</p>
+          <div className="divider mx-10"></div>
+          <div className="text-center my-2 flex justify-center">
+            
             <button
               onClick={handleGoogleSignIn}
-              className="btn mb-6 mt-2"
+              className="flex justify-center items-center gap-2 bg-base-200 px-4 py-2 rounded-lg mb-6 mt-2"
               disabled={loading}
             >
               <img className="w-8 h-8" src={googleImg} alt="Google" />
-              {loading ? "Signing in..." : "Sign in with Google"}
+              {loading ? "Signing in..." : "Google"}
             </button>
             <button
               onClick={handleGithubSignIn}
-              className="btn mb-6 mt-2"
+              className="flex justify-center items-center gap-2 bg-base-200 px-4 py-2 rounded-lg mb-6 mt-2 ml-3"
               disabled={loading}
             >
               <img className="w-8 h-8" src={googleImg} alt="GitHub" />
-              {loading ? "Signing in..." : "Sign in with GitHub"}
+              {loading ? "Signing in..." : "GitHub"}
             </button>
           </div>
         </div>

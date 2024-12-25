@@ -6,7 +6,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
-  console.log(user)
+
 
   const [loading, setLoading] = useState(false);
 

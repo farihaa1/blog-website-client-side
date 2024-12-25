@@ -2,32 +2,35 @@ import React from "react";
 import { motion } from "framer-motion";
 import bannerData from "../../assets/Lottie/bannerData.json";
 import Lottie from "lottie-react";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
-    <div className="container mx-auto relative w-full py-8 md:py-12 flex items-start justify-center md:justify-start h-[650px] md:h-[450px] top-10">
-      {/* Lottie as background */}
-      <div className="bg-green-900">
+    <div className="container mx-auto w-full mt-6 py-6 md:py-12 flex md:items-start justify-start md:justify-center  md:h-[370px] lg:h-[430px] flex-col-reverse md:flex-row-reverse lg:px-6">
+      <div className="w-2/3 mx-auto md:w-7/12 lg:w-5/12">
         <motion.div
-          animate={{ y: [20, 50, 20], x: [0, 10, 0] }}
+          animate={{ y: [-20, 25, -20], x: [10, 20, 10] }}
           transition={{ duration: 7, repeat: Infinity }}
-          className="absolute top-56 md:top-5 md:left-1/2 w-11/12 mx-auto md:w-2/4 h-full z-0"
+          className=""
         >
           <Lottie className="w-full" animationData={bannerData} />
         </motion.div>
       </div>
 
-      <div className=" md:top-10">
-      <div className=" z-10 flex md:items-start  flex-col h-full text-center md:text-start text-black max-w-xl md:py-12 ">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-5 text-center md:text-start">
-          Welcome to <br />
-          Our Blog!
-        </h1>
-        <p className="text-xl mb-6 text-text md:text-start">
-          Explore insightful articles, expert tips, in-depth guides, and the
-          latest trends in technology, lifestyle, and more.
-        </p>
-      </div>
+      <div>
+        <motion.div animate={{ x: [-150, 30, 0] }} transition={{ duration: 3 }}>
+          <div className="flex flex-col md:justify-center max-w-lg mx-auto px-2 md:pl-10">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5 text-center md:text-start text-blue-950">
+              Welcome to <br />
+              Our Blog!
+            </h1>
+            <p className="text-sm md:text-[17px] lg:text-xl mb-6 text-text text-center md:text-start max-w-md md:max-w-4xl mx-auto">
+              Explore insightful articles, expert tips, in-depth guides, and the
+              latest trends in technology, lifestyle, and more.
+            </p>
+            <Link>p</Link>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
