@@ -26,9 +26,7 @@ const AddBlog = () => {
     const shortDescription = parseInt(form.shortDescription.value);
     const longDescription = form.longDescription.value;
     
-    const id = blog.length > 0 ? blog[blog.length - 1].id + 1 : 1;
     const blogData = {
-      id,
       title,
       imageUrl,
       category,
