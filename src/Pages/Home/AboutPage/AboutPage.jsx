@@ -2,19 +2,22 @@ import React from "react";
 
 const AboutPage = () => {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="container  mx-auto px-6 py-8 my-12">
+      
+
+      <div className="flex flex-col justify-center items-center my-2 pb-4">
       <h4 className="text-2xl md:text-4xl font-semibold text-center mb-6">
-        Create, Share, and Engage with BlogWeb Blog Site
+        Create, Share, and Engage with <br /> BlogWeb Blog Site
       </h4>
+        <p className=" mb-8 max-w-2xl text-center">
+          BlogWeb is more than just a blog platform; it's a community where
+          creators, writers, and readers come together to share ideas, stories,
+          and knowledge.
+        </p>
+      </div>
 
-      <p className="text-center mb-8">
-        BlogWeb is more than just a blog platform; it's a community where
-        creators, writers, and readers come together to share ideas, stories,
-        and knowledge.
-      </p>
-
-      <div className="flex flex-col md:flex-row justify-between gap-8 mb-12">
-        <figure className="flex-1">
+      <div className="flex flex-row justify-between gap-4 md:gap-8 mb-12 py-4">
+        <figure className="w-2/4">
           <img
             src="https://i.ibb.co.com/pwgBBWQ/pngtree-blogging-concept-picture-writer-laptop-png-image-5722986.png"
             alt="Powerful Blogs"
@@ -23,7 +26,7 @@ const AboutPage = () => {
         </figure>
         <div className="flex-1">
           <h3 className="text-xl font-semibold mb-4">POWERFUL Blogs</h3>
-          <ul className="list-disc pl-5">
+          <ul className="list-disc pl-5 text-sm space-y-1">
             <li>
               BlogWeb’s easy-to-use editor empowers you to create rich,
               interactive blog posts with media, links, and more.
@@ -35,15 +38,15 @@ const AboutPage = () => {
             </li>
           </ul>
           <div className="mt-4">
-            <p className="text-lg text-gray-500">
-              Categories: Technology, Lifestyle, Education, Business
+            <p className=" text-gray-600 text-sm ml-4">
+              Technology, Lifestyle, Education, Business
             </p>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-row-reverse justify-between gap-8 mb-12 w-full">
-        <figure className=" w-1/3 ">
+      <div className="flex flex-row-reverse justify-between gap-8 mb-12 w-full ">
+        <figure className=" w-2/4 ">
           <img
             src="https://i.ibb.co.com/tYDYQqR/images-q-tbn-ANd9-Gc-RYLdw7-K5a-Jv1y5-LY4v83m-R0-Xeg-Str-UIkbp-XQ-s.png"
             alt="Real-Time Collaboration"
@@ -54,7 +57,7 @@ const AboutPage = () => {
           <h3 className="text-xl font-semibold mb-4">
             Keep EVERYONE On the Same Page
           </h3>
-          <ul className="list-disc pl-5">
+          <ul className="list-disc pl-5 text-sm space-y-1">
             <li>
               Collaborate seamlessly with fellow bloggers, readers, and
               contributors in real-time through comments and live editing.
@@ -64,17 +67,17 @@ const AboutPage = () => {
               notifications and updates on your blog posts.
             </li>
           </ul>
-          <div className="mt-4">
-            <p className="text-lg text-gray-500">Real-Time Collaboration</p>
-            <p className="text-lg text-gray-500">Comments & Engagement</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <p className="text-white text-sm bg-btn1 px-2 py-1 rounded">Real-Time Collaboration</p>
+            <p className="text-white text-sm bg-btn1 px-2 py-1 rounded">Comments & Engagement</p>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-between gap-8 mb-12">
-        <figure className="flex-1">
+      <div className="flex flex-row justify-between gap-4 md:gap-8 mb-12 py-4">
+        <figure className="w-2/4">
           <img
-            src="path/to/your-image3.jpg"
+            src="https://i.ibb.co.com/KFXm3ps/5-Great-Ways-1024x657.jpg"
             alt="Organized Workspaces"
             className="w-full h-auto rounded-lg shadow-lg"
           />
@@ -83,7 +86,7 @@ const AboutPage = () => {
           <h3 className="text-xl font-semibold mb-4">
             ORGANIZE Your Content with Ease
           </h3>
-          <ul className="list-disc pl-5">
+          <ul className="list-disc pl-5 text-sm space-y-1">
             <li>
               Organize your blogs into categories, tags, and collections to make
               it easy for readers to find what they love.
@@ -93,9 +96,9 @@ const AboutPage = () => {
               your content and audience while keeping things neatly organized.
             </li>
           </ul>
-          <div className="mt-4">
-            <p className="text-lg text-gray-500">Category Management</p>
-            <p className="text-lg text-gray-500">Content Organization</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <p className="text-white text-sm bg-btn1 px-2 py-1 rounded">Category Management</p>
+            <p className="text-white text-sm bg-btn1 px-2 py-1 rounded">Content Organization</p>
           </div>
         </div>
       </div>
@@ -105,8 +108,8 @@ const AboutPage = () => {
           Ready to share your story? Join the BlogWeb community today!
         </p>
         <a
-          href="/signup"
-          className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300"
+          href="/sign-in"
+          className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300"
         >
           Start Writing Now
         </a>

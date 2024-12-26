@@ -29,8 +29,7 @@ const Banner = () => {
               latest trends in technology, lifestyle, and more.
             </p>
             <button className="bg-gradient-to-r from-primary to-btn1 w-3/6 justify-center my-2 text-white flex flex-row items-center gap-2 text-lg px-4 py-2 rounded-md">
-              <a href="#newsletter-section">Subscribe Now</a>
-              <FaArrowTurnDown />
+              Sign In Now!
             </button>
           </div>
         </motion.div>

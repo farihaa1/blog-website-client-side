@@ -1,5 +1,6 @@
 import AboutPage from "./AboutPage/AboutPage";
 import Banner from "./Banner";
+import FeaturedBloggers from "./FeaturedBloggers";
 import Newsletter from "./Newsletter";
 import RecentBlogs from "./RecentBlogs";
 
@@ -14,6 +15,9 @@ const HomePage = () => {
       </main>
       <section>
         <AboutPage></AboutPage>
+      </section>
+      <section>
+        <FeaturedBloggers></FeaturedBloggers>
       </section>
       <section>
         <Newsletter></Newsletter>

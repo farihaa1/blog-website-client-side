@@ -35,8 +35,8 @@ const Router = createBrowserRouter([
             <WishList></WishList>
           </PrivateRoute>
         ),
-        
-      },,
+      },
+      ,
       {
         path: "/blogs/update/:id",
         element: (
@@ -44,21 +44,25 @@ const Router = createBrowserRouter([
             <UpdateBlogPage></UpdateBlogPage>
           </PrivateRoute>
         ),
-        
       },
       {
         path: "/all-blogs",
-        element: <AllBlogs></AllBlogs>
+        element: <AllBlogs></AllBlogs>,
       },
       {
         path: "/blogs/:id",
-        element: <BlogDetails></BlogDetails>,
-        loader: ({params})=> fetch(`http://localhost:5000/blogs/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <BlogDetails></BlogDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/blogs/${params.id}`),
       },
       {
         path: "/featured-blogs",
         element: <FeaturedBlogs></FeaturedBlogs>,
-        loader: ()=> fetch("http://localhost:5000/featured-blogs"),
+        loader: () => fetch("http://localhost:5000/featured-blogs"),
       },
       {
         path: "/register",

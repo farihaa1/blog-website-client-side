@@ -9,12 +9,11 @@ const RecentBlogs = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/recent-blogs", {
-      withCredentials: true,
-    })
+    fetch("http://localhost:5000/recent-blogs")
       .then((res) => res.json())
       .then((data) => setRecentBlogs(data));
   }, []);
+  
 
   const handleAddToWishlist = async (blogId) => {
     if (!user) {

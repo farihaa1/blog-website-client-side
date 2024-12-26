@@ -13,3 +13,5 @@ Add a list of your pages here.
 - **framer-motion**: .
 - **react-lottie**: .
 - **react-Icon**: .
+
+extra section about page 

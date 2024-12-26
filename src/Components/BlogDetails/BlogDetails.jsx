@@ -120,7 +120,7 @@ const BlogDetails = () => {
                 <div key={comment._id} className="mb-4 border-b pb-4">
                   <div className="flex items-center mb-2">
                     <img
-                      src={comment.userProfilePicture || "/default-avatar.png"} // Fallback image
+                      src={comment.userProfilePicture || "https://i.ibb.co.com/Yj9hZGn/3135715.png"} // Fallback image
                       alt={comment.userName}
                       className="w-8 h-8 rounded-full mr-2"
                     />

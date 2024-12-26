@@ -42,9 +42,9 @@ const AllBlogs = () => {
     if (!user) {
       Swal.fire({
         icon: "error",
-        title: "Oops...",
         text: "Please log in to add blogs to your wishlist.",
       });
+      navigate('/sign-in')
       return;
     }
 
