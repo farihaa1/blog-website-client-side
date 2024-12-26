@@ -107,27 +107,7 @@ const FeaturedBlogs = () => {
         </table>
       </div>
 
-      <div className="flex justify-between items-center my-4">
-        <span className="text-sm">
-          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
-        </span>
-        <div className="btn-group">
-          <button
-            className="btn btn-primary"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            {"<"}
-          </button>
-          <button
-            className="btn btn-primary"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            {">"}
-          </button>
-        </div>
-      </div>
+     
     </div>
   );
 };

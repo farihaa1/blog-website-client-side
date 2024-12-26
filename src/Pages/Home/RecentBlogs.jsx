@@ -10,7 +10,7 @@ const RecentBlogs = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app//recent-blogs")
+    fetch("https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/recent-blogs")
       .then((res) => res.json())
       .then((data) => setRecentBlogs(data));
   }, []);
@@ -27,7 +27,7 @@ const RecentBlogs = () => {
 
     try {
       await axios.post(
-        "https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app//wishlist",
+        "https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/wishlist",
         {
           userEmail: user?.email,
           blogId,

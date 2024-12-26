@@ -24,7 +24,7 @@ const AllBlogs = () => {
   const fetchBlogs = async () => {
     try {
       const response = await fetch(
-        `https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app//blogs?search=${search}&category=${category}`,
+        `https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/blogs?search=${search}&category=${category}`,
         {
           withCredentials: true,
         }
@@ -50,7 +50,7 @@ const AllBlogs = () => {
 
     try {
       await axios.post(
-        "https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app//wishlist",
+        "https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/wishlist",
         {
           userEmail: user?.email,
           blogId,
@@ -85,7 +85,7 @@ const AllBlogs = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-4 py-8 lg:py-12">
+    <div className="max-w-6xl mx-auto p-6 py-8 lg:py-12">
       <h1 className="text-3xl font-bold mb-4">All Blogs</h1>
 
       {/* Search and Category Filter */}

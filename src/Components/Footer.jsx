@@ -22,6 +22,9 @@ const Footer = () => {
         <Link to="/add-blog" className="link link-hover">
           Add blog
         </Link>
+        <Link to="/all-blogs" className="link link-hover">
+          All-blogs
+        </Link>
         
       </nav>
       <nav>
