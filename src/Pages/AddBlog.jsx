@@ -9,7 +9,7 @@ const AddBlog = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/blogs")
+    fetch("https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app//blogs")
       .then((res) => res.json())
       .then((data) => setBlog(data));
   }, []);
@@ -45,7 +45,7 @@ const AddBlog = () => {
     };
 
     try {
-      const res = await axios.post("http://localhost:5000/blogs", blogData, {
+      const res = await axios.post("https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app//blogs", blogData, {
         withCredentials: true,
       });
       const newBlog = res.data;

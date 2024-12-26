@@ -30,9 +30,19 @@ const AuthProviders = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logout = () => {
-    return signOut(auth);
+  const logout = async () => {
+    try {
+      localStorage.removeItem("token");
+
+      await signOut(auth);
+  
+      setUser(null);
+    } catch (error) {
+      console.error("Error during logout:", error);
+      throw error;
+    }
   };
+  
 
   const handleGoogleLogin = () => {
     return signInWithPopup(auth, googleProvider);
@@ -67,13 +77,26 @@ const AuthProviders = ({ children }) => {
   };
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        try {
+          const idToken = await currentUser.getIdToken(true);
+          localStorage.setItem("token", idToken);
+        } catch (error) {
+          console.error("Error fetching token:", error);
+        }
+      } else {
+
+        localStorage.removeItem("token");
+      }
+  
       setUser(currentUser);
-      console.log("state captured");
       setLoading(false);
     });
+  
     return () => unSubscribe();
   }, []);
+  
 
   const userInfo = {
     user,

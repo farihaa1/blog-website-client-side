@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -9,11 +10,10 @@ const RecentBlogs = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/recent-blogs")
+    fetch("https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app//recent-blogs")
       .then((res) => res.json())
       .then((data) => setRecentBlogs(data));
   }, []);
-  
 
   const handleAddToWishlist = async (blogId) => {
     if (!user) {
@@ -27,7 +27,7 @@ const RecentBlogs = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/wishlist",
+        "https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app//wishlist",
         {
           userEmail: user?.email,
           blogId,
@@ -60,7 +60,11 @@ const RecentBlogs = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 lg:px-6">
+    <motion.div
+      animate={{ y: [90, 25, 20]}}
+      transition={{ duration: 4 }}
+      className="container mx-auto px-4 lg:px-6"
+    >
       <h1 className="text-2xl md:text-4xl font-semibold pb-6">Recent Blogs</h1>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 min-h-max">
         {recentBlogs.map((blog) => (
@@ -95,7 +99,7 @@ const RecentBlogs = () => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

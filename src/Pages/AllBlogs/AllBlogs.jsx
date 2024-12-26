@@ -24,7 +24,7 @@ const AllBlogs = () => {
   const fetchBlogs = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/blogs?search=${search}&category=${category}`,
+        `https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app//blogs?search=${search}&category=${category}`,
         {
           withCredentials: true,
         }
@@ -50,7 +50,7 @@ const AllBlogs = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/wishlist",
+        "https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app//wishlist",
         {
           userEmail: user?.email,
           blogId,
@@ -85,7 +85,7 @@ const AllBlogs = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <div className="max-w-6xl mx-auto p-4 py-8 lg:py-12">
       <h1 className="text-3xl font-bold mb-4">All Blogs</h1>
 
       {/* Search and Category Filter */}
@@ -109,44 +109,44 @@ const AllBlogs = () => {
           <option value="Education">Education</option>
         </select>
       </div>
-      {loading && (
+      {loading ? (
         <div className=" flex justify-center items-center h-80 mt-3 mb-6">
           <progress className="progress w-56"></progress>
         </div>
-      )}
+      ): <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {blogs.map((blog) => (
+        <div key={blog._id} className="border rounded p-4 shadow ">
+          <img
+            src={blog.imageUrl || "https://via.placeholder.com/150"}
+            alt={blog.title || "Blog Image"}
+            className="w-full h-48 object-cover rounded"
+          />
+          <h2 className="text-xl font-bold mt-4">{blog.title}</h2>
+          <p className="text-gray-600">{blog.shortDescription}</p>
+          <p className="mt-2 text-sm text-gray-500">
+            Category: {blog.category}
+          </p>
 
-      {/* Blog Listings */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {blogs.map((blog) => (
-          <div key={blog._id} className="border rounded p-4 shadow ">
-            <img
-              src={blog.imageUrl || "https://via.placeholder.com/150"}
-              alt={blog.title || "Blog Image"}
-              className="w-full h-48 object-cover rounded"
-            />
-            <h2 className="text-xl font-bold mt-4">{blog.title}</h2>
-            <p className="text-gray-600">{blog.shortDescription}</p>
-            <p className="mt-2 text-sm text-gray-500">
-              Category: {blog.category}
-            </p>
-
-            <div className="flex justify-between mt-4">
-              <button
-                onClick={() => navigate(`/blogs/${blog._id}`)}
-                className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-600"
-              >
-                Details
-              </button>
-              <button
-                onClick={() => handleAddToWishlist(blog._id)}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-              >
-                Add to Wishlist
-              </button>
-            </div>
+          <div className="flex justify-between mt-4">
+            <button
+              onClick={() => navigate(`/blogs/${blog._id}`)}
+              className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Details
+            </button>
+            <button
+              onClick={() => handleAddToWishlist(blog._id)}
+              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+            >
+              Add to Wishlist
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
+    </div>}
+
+   
+     
     </div>
   );
 };
