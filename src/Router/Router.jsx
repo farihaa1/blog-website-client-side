@@ -8,6 +8,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AllBlogs from "../Pages/AllBlogs/AllBlogs";
 import WishList from "../Pages/WishList/WishList";
 import FeaturedBlogs from "../Pages/FeaturedBlogs/FeaturedBlogs";
+import BlogDetails from "./BlogDetails/BlogDetails";
 
 const Router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ const Router = createBrowserRouter([
       {
         path: "/all-blogs",
         element: <AllBlogs></AllBlogs>
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetails></BlogDetails>,
+        loader: ({params})=> fetch(`http://localhost:5000/blogs/${params.id}`),
       },
       {
         path: "/featured-blogs",

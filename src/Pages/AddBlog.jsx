@@ -32,6 +32,7 @@ const AddBlog = () => {
       category,
       shortDescription,
       longDescription,
+      authorEmail: user.email
     };
 
     try {
