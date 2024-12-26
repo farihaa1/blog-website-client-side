@@ -1,12 +1,25 @@
+import AboutPage from "./AboutPage/AboutPage";
 import Banner from "./Banner";
-
+import Newsletter from "./Newsletter";
+import RecentBlogs from "./RecentBlogs";
 
 const HomePage = () => {
-    return (
-        <div>
-            <Banner></Banner>
-        </div>
-    );
+  return (
+    <div>
+      <header>
+        <Banner></Banner>
+      </header>
+      <main>
+        <RecentBlogs></RecentBlogs>
+      </main>
+      <section>
+        <AboutPage></AboutPage>
+      </section>
+      <section>
+        <Newsletter></Newsletter>
+      </section>
+    </div>
+  );
 };
 
 export default HomePage;

@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import bannerData from "../../assets/Lottie/bannerData.json";
 import Lottie from "lottie-react";
-import { Link } from "react-router-dom";
+import { FaArrowTurnDown } from "react-icons/fa6";
 
 const Banner = () => {
   return (
@@ -19,16 +19,19 @@ const Banner = () => {
 
       <div>
         <motion.div animate={{ x: [-150, 30, 0] }} transition={{ duration: 3 }}>
-          <div className="flex flex-col md:justify-center max-w-lg mx-auto px-2 md:pl-10">
+          <div className="flex flex-col items-center md:items-start md:justify-center max-w-lg mx-auto px-2 md:pl-10">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5 text-center md:text-start text-blue-950">
               Welcome to <br />
               Our Blog!
             </h1>
-            <p className="text-sm md:text-[17px] lg:text-xl mb-6 text-text text-center md:text-start max-w-md md:max-w-4xl mx-auto">
+            <p className="text-sm md:text-[17px] lg:text-xl mb-6 text-text text-center md:items-start md:text-start max-w-md md:max-w-4xl mx-auto">
               Explore insightful articles, expert tips, in-depth guides, and the
               latest trends in technology, lifestyle, and more.
             </p>
-            <Link>p</Link>
+            <button className="bg-gradient-to-r from-primary to-btn1 w-3/6 justify-center my-2 text-white flex flex-row items-center gap-2 text-lg px-4 py-2 rounded-md">
+              <a href="#newsletter-section">Subscribe Now</a>
+              <FaArrowTurnDown />
+            </button>
           </div>
         </motion.div>
       </div>

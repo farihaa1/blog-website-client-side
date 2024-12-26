@@ -11,19 +11,6 @@ const BlogDetails = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-
-  const time24 = blogDetails.createdTime;
-
-
-let [hours, minutes, seconds] = time24.split(":");
-
-hours = (hours % 12) || 12; 
-
-const time12 = `${hours}:${minutes}`;
-
-console.log(time12); 
-
-
   useEffect(() => {
     fetchComments();
   }, []);
@@ -44,7 +31,7 @@ console.log(time12);
       userName: user.displayName,
       userProfilePicture: user.photoURL,
       content: newComment.trim(),
-      createdAt: new Date().toISOString(),
+      createdAt: new Date().toLocaleDateString(),
     };
 
     try {
@@ -71,11 +58,11 @@ console.log(time12);
       <div>
         <img className="py-10" src={blogDetails.imageUrl} alt="" />
       </div>
-      <div className="flex flex-row gap-4 mt-2 mb-4">
+      <div className="flex flex-row gap-2 md:gap-4 mt-2 mb-4 flex-wrap">
         {blogDetails.tags.map((tag, idx) => (
           <p
             key={idx}
-            className="bg-red-400 text-base-200 px-4 py-1 rounded-xl"
+            className="bg-red-400 text-xs md:text-sm text-base-200 px-4 py-1 rounded-xl"
           >
             {" "}
             {tag}
@@ -84,13 +71,14 @@ console.log(time12);
       </div>
       <h1 className="text-3xl font-bold mb-4">{blogDetails.title}</h1>
       <p className="pb-3"> Author: {blogDetails.authorName}</p>
-    
-        <div className=" flex gap-3 justify-between">
-          <p className="text-gray-600">Category: {blogDetails.category}</p>
-          <p className="text-gray-600">Created At: {blogDetails.createdDate}</p>
-        </div>
-       
-    
+
+      <div className=" flex gap-3 justify-between">
+        <p className="text-gray-600">Category: {blogDetails.category}</p>
+        {blogDetails.createDate && (
+          <p className="text-gray-600">Created At: {blogDetails.createDate}</p>
+        )}
+      </div>
+
       <p className="mt-4">{blogDetails.shortDescription}</p>
       <p className="mt-4">{blogDetails.longDescription}</p>
       {isBlogOwner && (
@@ -127,25 +115,25 @@ console.log(time12);
         )}
 
         <div className="mt-4">
-          {comments && comments.length > 0 ? (
-            comments.map((comment) => (
-              <div key={comment._id} className="mb-4 border-b pb-4">
-                <div className="flex items-center mb-2">
-                  <img
-                    src={comment.userProfilePicture || "/default-avatar.png"} // Fallback image
-                    alt={comment.userName}
-                    className="w-8 h-8 rounded-full mr-2"
-                  />
-                  <span className="font-medium">{comment.userName}</span>
+          {comments && comments.length > 0
+            ? comments.map((comment) => (
+                <div key={comment._id} className="mb-4 border-b pb-4">
+                  <div className="flex items-center mb-2">
+                    <img
+                      src={comment.userProfilePicture || "/default-avatar.png"} // Fallback image
+                      alt={comment.userName}
+                      className="w-8 h-8 rounded-full mr-2"
+                    />
+                    <span className="font-medium">{comment.userName}</span>
+                  </div>
+                  <p>{comment.content}</p>
                 </div>
-                <p>{comment.content}</p>
-              </div>
-            ))
-          ) : (
-            <p className="text-gray-500">
-              No comments yet. Be the first to comment!
-            </p>
-          )}
+              ))
+            : !isBlogOwner && (
+                <p className="text-gray-500">
+                  No comments yet. Be the first to comment!
+                </p>
+              )}
         </div>
       </div>
     </div>

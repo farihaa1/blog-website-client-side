@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProvider";
@@ -47,8 +47,8 @@ const UpdateBlogPage = () => {
         typeof blogData.tags === "string"
           ? blogData.tags.split(",").map((tag) => tag.trim())
           : blogData.tags,
-      updatedDate: new Date().toLocaleDateString(), // Current date for update
-      updatedTime: new Date().toLocaleTimeString(), // Current time for update
+      updatedDate: new Date().toLocaleDateString(), 
+      updatedTime: new Date().toLocaleTimeString(), 
     };
     setLoading(true);
     try {
@@ -154,7 +154,7 @@ const UpdateBlogPage = () => {
         >
           Update Blog
         </button>
-        <button className="bg-red-400 mt-6 mb-4 text-white px-6 py-2 rounded  ml-4">Cancel</button>
+        <Link to ={`/blogs/${blogData._id}`} className="bg-red-400 mt-6 mb-4 text-white px-6 py-2 rounded  ml-4">Cancel</Link>
       </form>
     </div>
   );
