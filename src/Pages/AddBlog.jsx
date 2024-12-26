@@ -16,23 +16,32 @@ const AddBlog = () => {
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const title = form.title.value;
     const imageUrl = form.imageUrl.value;
     const category = form.category.value;
-    const shortDescription = parseInt(form.shortDescription.value);
+    const shortDescription = form.shortDescription.value;
     const longDescription = form.longDescription.value;
-    
+    const tags = form.tags.value.split(",").map(tag => tag.trim()); // Split by commas for multiple tags
+
+    const createDate = new Date().toLocaleDateString(); // Current date
+    const createdTime = new Date().toLocaleTimeString(); // Current time
+    const authorName = user.displayName || "Anonymous"; // Fetch author's name from user context
+
     const blogData = {
       title,
       imageUrl,
       category,
       shortDescription,
       longDescription,
-      authorEmail: user.email
+      tags,
+      createDate,
+      createdTime,
+      authorEmail: user.email,
+      authorName,
     };
 
     try {
@@ -92,13 +101,13 @@ const AddBlog = () => {
             <option value="Health">Health</option>
             <option value="Lifestyle">Lifestyle</option>
             <option value="Education">Education</option>
+            <option value="Travel">Travel</option>
           </select>
         </div>
         <div>
           <label className="block font-medium">Short Description</label>
           <textarea
             name="shortDescription"
-           
             rows="3"
             className="w-full border border-gray-300 p-2 rounded"
             required
@@ -111,6 +120,15 @@ const AddBlog = () => {
             rows="6"
             className="w-full border border-gray-300 p-2 rounded"
             required
+          />
+        </div>
+        <div>
+          <label className="block font-medium">Tags (comma separated)</label>
+          <input
+            type="text"
+            name="tags"
+            className="w-full border border-gray-300 p-2 rounded"
+            placeholder="e.g. React, JavaScript, Web Development"
           />
         </div>
         <button

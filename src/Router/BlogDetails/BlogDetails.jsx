@@ -11,6 +11,19 @@ const BlogDetails = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
+
+  const time24 = blogDetails.createdTime;
+
+
+let [hours, minutes, seconds] = time24.split(":");
+
+hours = (hours % 12) || 12; 
+
+const time12 = `${hours}:${minutes}`;
+
+console.log(time12); 
+
+
   useEffect(() => {
     fetchComments();
   }, []);
@@ -27,12 +40,12 @@ const BlogDetails = () => {
     if (!newComment.trim()) return;
 
     const commentData = {
-        blogId: blogDetails._id,
-        userName: user.displayName,
-        userProfilePicture: user.photoURL,
-        content: newComment.trim(),
-        createdAt: new Date().toISOString(), 
-      };
+      blogId: blogDetails._id,
+      userName: user.displayName,
+      userProfilePicture: user.photoURL,
+      content: newComment.trim(),
+      createdAt: new Date().toISOString(),
+    };
 
     try {
       await axios.post("http://localhost:5000/comments", commentData);
@@ -46,7 +59,7 @@ const BlogDetails = () => {
   };
 
   const handleUpdateNavigate = () => {
-    navigate(`/blogs/edit/${id}`);
+    navigate(`/blogs/update/${blogDetails._id}`);
   };
 
   if (!blogDetails) return <div>Loading...</div>;
@@ -58,11 +71,26 @@ const BlogDetails = () => {
       <div>
         <img className="py-10" src={blogDetails.imageUrl} alt="" />
       </div>
-      <h1 className="text-3xl font-bold mb-4">{blogDetails.title}</h1>
-      <div className="flex gap-6">
-        <p className="text-gray-600">Category: {blogDetails.category}</p>
-        <p className="text-gray-600">Created At:</p>
+      <div className="flex flex-row gap-4 mt-2 mb-4">
+        {blogDetails.tags.map((tag, idx) => (
+          <p
+            key={idx}
+            className="bg-red-400 text-base-200 px-4 py-1 rounded-xl"
+          >
+            {" "}
+            {tag}
+          </p>
+        ))}
       </div>
+      <h1 className="text-3xl font-bold mb-4">{blogDetails.title}</h1>
+      <p className="pb-3"> Author: {blogDetails.authorName}</p>
+    
+        <div className=" flex gap-3 justify-between">
+          <p className="text-gray-600">Category: {blogDetails.category}</p>
+          <p className="text-gray-600">Created At: {blogDetails.createdDate}</p>
+        </div>
+       
+    
       <p className="mt-4">{blogDetails.shortDescription}</p>
       <p className="mt-4">{blogDetails.longDescription}</p>
       {isBlogOwner && (
@@ -74,7 +102,7 @@ const BlogDetails = () => {
         </button>
       )}
 
-   z   <div className="my-12">
+      <div className="my-12">
         <h2 className="text-2xl font-bold mb-4">Comments</h2>
         {!isBlogOwner ? (
           <form onSubmit={handleCommentSubmit} className="mb-6">
