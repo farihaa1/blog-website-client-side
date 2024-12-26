@@ -16,7 +16,7 @@ const AllBlogs = () => {
     setLoading(true);
     const timeoutId = setTimeout(() => {
       fetchBlogs();
-    }, 200); 
+    }, 200);
 
     return () => clearTimeout(timeoutId);
   }, [search, category]);
@@ -24,7 +24,10 @@ const AllBlogs = () => {
   const fetchBlogs = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/blogs?search=${search}&category=${category}`
+        `http://localhost:5000/blogs?search=${search}&category=${category}`,
+        {
+          withCredentials: true,
+        }
       );
       const data = await response.json();
       setBlogs(data);
@@ -34,11 +37,6 @@ const AllBlogs = () => {
       setLoading(false);
     }
   };
-  
-  
-
-
- 
 
   const handleAddToWishlist = async (blogId) => {
     if (!user) {
@@ -51,40 +49,45 @@ const AllBlogs = () => {
     }
 
     try {
-        await axios.post("http://localhost:5000/wishlist", {
-          userId: user.uid,
+      await axios.post(
+        "http://localhost:5000/wishlist",
+        {
+          userEmail: user?.email,
           blogId,
-        });
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      Swal.fire({
+        icon: "success",
+        title: "Added to Wishlist",
+        text: "The blog has been added to your wishlist successfully.",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
         Swal.fire({
-          icon: "success",
-          title: "Added to Wishlist",
-          text: "The blog has been added to your wishlist successfully.",
-          timer: 2000,
-          showConfirmButton: false,
+          icon: "error",
+          title: "Already Exists",
+          text: "This blog is already in your wishlist.",
         });
-      } catch (error) {
-        if (error.response && error.response.status === 409) {
-            Swal.fire({
-              icon: "error",
-              title: "Already Exists",
-              text: "This blog is already in your wishlist.",
-            });
-          } else {
-            console.error("Unexpected error:", error); // Log only unexpected errors
-            Swal.fire({
-              icon: "error",
-              title: "Failed",
-              text: "There was an error adding the blog to your wishlist.",
-            });
-          }
+      } else {
+        console.error("Unexpected error:", error); // Log only unexpected errors
+        Swal.fire({
+          icon: "error",
+          title: "Failed",
+          text: "There was an error adding the blog to your wishlist.",
+        });
       }
-      
+    }
   };
 
   return (
     <div className="max-w-6xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">All Blogs</h1>
-     
+
       {/* Search and Category Filter */}
       <div className="flex items-center space-x-4 mb-6">
         <input
@@ -106,8 +109,11 @@ const AllBlogs = () => {
           <option value="Education">Education</option>
         </select>
       </div>
-     {loading && <div className=" flex justify-center items-center h-80 mt-3 mb-6"><progress className="progress w-56"></progress></div>}
-      
+      {loading && (
+        <div className=" flex justify-center items-center h-80 mt-3 mb-6">
+          <progress className="progress w-56"></progress>
+        </div>
+      )}
 
       {/* Blog Listings */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

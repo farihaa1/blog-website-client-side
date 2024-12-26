@@ -24,7 +24,6 @@ const LoginPage = () => {
 
     loginUser(email, password)
       .then((res) => {
-        console.log("Logged in user", res.user);
         setError("");
         navigate(from, { replace: true });
       })
@@ -68,7 +67,7 @@ const LoginPage = () => {
       const res = await handleGithubLogin();
       const token = res._tokenResponse.oauthAccessToken;
 
-      console.log("GitHub sign-in user:", res.user);
+    
 
       // Fetch user's email if not directly available
       let email = res.user.email;
@@ -76,7 +75,6 @@ const LoginPage = () => {
         email = await fetchGithubEmail(token);
       }
 
-      console.log("GitHub user email:", email);
       navigate(from, { replace: true });
     } catch (err) {
       console.error("GitHub login error:", err.message);
@@ -90,7 +88,6 @@ const LoginPage = () => {
     setLoading(true);
     handleGoogleLogin()
       .then((res) => {
-        console.log("Google sign-in user", res.user);
         navigate(from, { replace: true });
       })
       .catch((err) => {

@@ -13,9 +13,11 @@ const WishList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch wishlist blogs based on the user ID (or any other identifier)
+    
     axios
-      .get(`http://localhost:5000/wishlist/${params.id}`)
+      .get(`http://localhost:5000/wishlist/${params.id}`, {
+        withCredentials: true
+      })
       .then((response) => {
         setWishlist(response.data);
       })
@@ -30,11 +32,11 @@ const WishList = () => {
     try {
      const res= await axios.delete("http://localhost:5000/wishlist", {
         data: {
-          userId: user.uid,
+          userEmail: user?.email,
           blogId,
         },
       });
-      console.log(res)
+   
   
       Swal.fire({
         icon: "success",

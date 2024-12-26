@@ -23,7 +23,12 @@ const UpdateBlogPage = () => {
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/blogs/${params.id}`);
+        const res = await axios.get(
+          `http://localhost:5000/blogs/${params.id}`,
+          {
+            withCredentials: true,
+          }
+        );
         setBlogData(res.data);
       } catch (error) {
         console.error("Error fetching blog data:", error);
@@ -47,8 +52,8 @@ const UpdateBlogPage = () => {
         typeof blogData.tags === "string"
           ? blogData.tags.split(",").map((tag) => tag.trim())
           : blogData.tags,
-      updatedDate: new Date().toLocaleDateString(), 
-      updatedTime: new Date().toLocaleTimeString(), 
+      updatedDate: new Date().toLocaleDateString(),
+      updatedTime: new Date().toLocaleTimeString(),
     };
     setLoading(true);
     try {
@@ -86,7 +91,9 @@ const UpdateBlogPage = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Image URL</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Image URL
+          </label>
           <input
             type="text"
             name="imageUrl"
@@ -114,7 +121,9 @@ const UpdateBlogPage = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Short Description</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Short Description
+          </label>
           <textarea
             name="shortDescription"
             value={blogData.shortDescription}
@@ -126,7 +135,9 @@ const UpdateBlogPage = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Long Description</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Long Description
+          </label>
           <textarea
             name="longDescription"
             value={blogData.longDescription}
@@ -137,7 +148,9 @@ const UpdateBlogPage = () => {
           ></textarea>
         </div>
         <div>
-          <label className="block text-gray-700 font-medium mb-2">Tags (comma separated)</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Tags (comma separated)
+          </label>
           <input
             type="text"
             name="tags"
@@ -154,7 +167,12 @@ const UpdateBlogPage = () => {
         >
           Update Blog
         </button>
-        <Link to ={`/blogs/${blogData._id}`} className="bg-red-400 mt-6 mb-4 text-white px-6 py-2 rounded  ml-4">Cancel</Link>
+        <Link
+          to={`/blogs/${blogData._id}`}
+          className="bg-red-400 mt-6 mb-4 text-white px-6 py-2 rounded  ml-4"
+        >
+          Cancel
+        </Link>
       </form>
     </div>
   );

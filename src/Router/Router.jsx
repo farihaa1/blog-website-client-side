@@ -8,7 +8,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AllBlogs from "../Pages/AllBlogs/AllBlogs";
 import WishList from "../Pages/WishList/WishList";
 import FeaturedBlogs from "../Pages/FeaturedBlogs/FeaturedBlogs";
-import BlogDetails from "./BlogDetails/BlogDetails";
+import BlogDetails from "../Components/BlogDetails/BlogDetails";
 import UpdateBlogPage from "../UpdateBlogPage/UpdateBlogPage";
 
 const Router = createBrowserRouter([

@@ -18,11 +18,7 @@ const Navbar = () => {
       console.log("successfully sign ot");
     });
   };
-  useEffect(() => {
-    if (user) {
-      console.log(`Welcome back, ${user.email}`);
-    }
-  }, [user]);
+
 
   const Links = (
     <>
@@ -74,9 +70,10 @@ const Navbar = () => {
           Featured Blogs
         </NavLink>
       </li>
-      <li>
+      {
+        user && <li>
         <NavLink
-          to={`/wishlist/${user.uid}`}
+          to={`/wishlist/${user?.email}`}
           className={({ isActive }) =>
             `px-4 py-2 rounded-lg ${
               isActive ? "bg-btn1 text-white font-semibold" : "text-gray-600"
@@ -86,6 +83,7 @@ const Navbar = () => {
           Wishlist
         </NavLink>
       </li>
+      }
     </>
   );
   return (

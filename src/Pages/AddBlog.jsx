@@ -25,11 +25,11 @@ const AddBlog = () => {
     const category = form.category.value;
     const shortDescription = form.shortDescription.value;
     const longDescription = form.longDescription.value;
-    const tags = form.tags.value.split(",").map(tag => tag.trim()); // Split by commas for multiple tags
-
-    const createDate = new Date().toLocaleDateString(); // Current date
-    const createdTime = new Date().toLocaleTimeString(); // Current time
-    const authorName = user.displayName || "Anonymous"; // Fetch author's name from user context
+    const tags = form.tags.value.split(",").map((tag) => tag.trim());
+    const createDate = new Date().toLocaleDateString();
+    const createdTime = new Date().toLocaleTimeString();
+    const authorName = user.displayName || "Anonymous";
+    const authorEmail = user.email;
 
     const blogData = {
       title,
@@ -40,12 +40,14 @@ const AddBlog = () => {
       tags,
       createDate,
       createdTime,
-      authorEmail: user.email,
+      authorEmail,
       authorName,
     };
 
     try {
-      const res = await axios.post("http://localhost:5000/blogs", blogData);
+      const res = await axios.post("http://localhost:5000/blogs", blogData, {
+        withCredentials: true,
+      });
       const newBlog = res.data;
 
       setBlog([...blog, newBlog]);

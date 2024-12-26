@@ -11,13 +11,14 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 import auth from "../../firebase.init";
+import axios from "axios";
 export const AuthContext = createContext();
 
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
-  const githubProvider = new GithubAuthProvider()
+  const githubProvider = new GithubAuthProvider();
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password).finally(() => {
@@ -67,7 +68,8 @@ const AuthProviders = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser || null);
+      setUser(currentUser);
+      console.log("state captured");
       setLoading(false);
     });
     return () => unSubscribe();
@@ -84,12 +86,11 @@ const AuthProviders = ({ children }) => {
     resetPassword,
     setLoading,
     handleGoogleLogin,
-    handleGithubLogin
+    handleGithubLogin,
   };
 
   return (
     <AuthContext.Provider value={userInfo}>
-    
       {loading ? (
         <div className="flex justify-center items-center min-h-screen">
           <span className="loading loading-ring text-blue-800 w-44 h-34"></span>
