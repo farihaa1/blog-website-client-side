@@ -1,15 +1,53 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const BlogDetails = () => {
   const blogDetails = useLoaderData();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
 
-  //   useEffect(()=>{
-  //     fetchComments();
-  //   },[])
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
+  const fetchComments = async () => {
+    const res = await axios.get(
+      `http://localhost:5000/comments/${blogDetails._id}`
+    );
+    setComments(res.data);
+  };
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+
+    const commentData = {
+        blogId: blogDetails._id,
+        userName: user.displayName,
+        userProfilePicture: user.photoURL,
+        content: newComment.trim(),
+        createdAt: new Date().toISOString(), 
+      };
+
+    try {
+      await axios.post("http://localhost:5000/comments", commentData);
+      setNewComment("");
+      fetchComments();
+      Swal.fire("Success", "Comment added successfully", "success");
+    } catch (error) {
+      console.error("Error adding comment:", error);
+      Swal.fire("Error", "Failed to add comment", "error");
+    }
+  };
+
+  const handleUpdateNavigate = () => {
+    navigate(`/blogs/edit/${id}`);
+  };
 
   if (!blogDetails) return <div>Loading...</div>;
 
@@ -17,13 +55,13 @@ const BlogDetails = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-        <div>
-            <img className="py-10" src={blogDetails.imageUrl} alt="" />
-        </div>
+      <div>
+        <img className="py-10" src={blogDetails.imageUrl} alt="" />
+      </div>
       <h1 className="text-3xl font-bold mb-4">{blogDetails.title}</h1>
       <div className="flex gap-6">
-      <p className="text-gray-600">Category: {blogDetails.category}</p>
-      <p className="text-gray-600">Created At:</p>
+        <p className="text-gray-600">Category: {blogDetails.category}</p>
+        <p className="text-gray-600">Created At:</p>
       </div>
       <p className="mt-4">{blogDetails.shortDescription}</p>
       <p className="mt-4">{blogDetails.longDescription}</p>
@@ -36,17 +74,19 @@ const BlogDetails = () => {
         </button>
       )}
 
-      <div className="my-12">
+   z   <div className="my-12">
         <h2 className="text-2xl font-bold mb-4">Comments</h2>
         {!isBlogOwner ? (
-          <form  className="mb-6">
+          <form onSubmit={handleCommentSubmit} className="mb-6">
             <textarea
-              
               className="border p-2 w-full rounded mb-2"
               rows="4"
               placeholder="Write a comment..."
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
               required
             ></textarea>
+
             <button
               type="submit"
               className="bg-primary text-white px-4 py-2 rounded"
@@ -57,7 +97,28 @@ const BlogDetails = () => {
         ) : (
           <p className="text-gray-500">Cannot comment on your own blog.</p>
         )}
-       
+
+        <div className="mt-4">
+          {comments && comments.length > 0 ? (
+            comments.map((comment) => (
+              <div key={comment._id} className="mb-4 border-b pb-4">
+                <div className="flex items-center mb-2">
+                  <img
+                    src={comment.userProfilePicture || "/default-avatar.png"} // Fallback image
+                    alt={comment.userName}
+                    className="w-8 h-8 rounded-full mr-2"
+                  />
+                  <span className="font-medium">{comment.userName}</span>
+                </div>
+                <p>{comment.content}</p>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500">
+              No comments yet. Be the first to comment!
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
