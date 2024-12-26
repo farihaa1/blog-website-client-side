@@ -51,7 +51,7 @@ const AllBlogs = () => {
     }
 
     try {
-        const response = await axios.post("http://localhost:5000/wishlist", {
+        await axios.post("http://localhost:5000/wishlist", {
           userId: user.uid,
           blogId,
         });

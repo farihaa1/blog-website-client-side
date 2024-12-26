@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { flexRender, useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel } from "@tanstack/react-table";
-import { FaSort } from "react-icons/fa"; // Import a sort icon from react-icons
+import { FaSort } from "react-icons/fa"; 
 
 const columns = [
   {
@@ -10,13 +10,13 @@ const columns = [
     cell: (props) => <span>{props.getValue()}</span>,
     enableColumnFilter: true,
     filterFn: "includesString",
-    enableSorting: false, // Disable sorting for the "Title" column
+    enableSorting: false, 
   },
   {
     accessorKey: "category",
     header: "Category",
     cell: (props) => <span>{props.getValue()}</span>,
-    enableSorting: true, // Enable sorting only for the "Category" column
+    enableSorting: true, 
     enableColumnFilter: true,
     filterFn: "includesString",
   },
@@ -24,7 +24,7 @@ const columns = [
     accessorKey: "authorName",
     header: "Author",
     cell: (props) => <span>{props.getValue()}</span>,
-    enableSorting: false, // Disable sorting for the "Author" column
+    enableSorting: false, 
     enableColumnFilter: true,
     filterFn: "includesString",
   },
@@ -32,7 +32,7 @@ const columns = [
     accessorKey: "wordCount",
     header: "Total Words",
     cell: (props) => <span>{props.getValue()}</span>,
-    enableSorting: false, // Disable sorting for the "Author" column
+    enableSorting: false, 
     enableColumnFilter: true,
     filterFn: "includesString",
   },
@@ -40,7 +40,6 @@ const columns = [
 
 const FeaturedBlogs = () => {
   const blogs = useLoaderData();
-  console.log(blogs)
   const [data, setData] = useState(blogs);
   const [columnFilters, setColumnFilters] = useState([]);
 
