@@ -1,12 +1,15 @@
 import AboutPage from "./AboutPage/AboutPage";
 import Banner from "./Banner";
+import { motion } from "framer-motion";
 import FeaturedBloggers from "./FeaturedBloggers";
 import Newsletter from "./Newsletter";
 import RecentBlogs from "./RecentBlogs";
 
 const HomePage = () => {
   return (
-    <div>
+    <motion.div 
+    animate={{ y: [150, 30, 0] }} 
+    transition={{ duration: 3 }}>
       <header>
         <Banner></Banner>
       </header>
@@ -22,7 +25,7 @@ const HomePage = () => {
       <section>
         <Newsletter></Newsletter>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

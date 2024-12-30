@@ -9,7 +9,7 @@ const AddBlog = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/blogs")
+    fetch("https://blog-website-server-side.vercel.app/blogs")
       .then((res) => res.json())
       .then((data) => setBlog(data));
   }, []);
@@ -26,8 +26,11 @@ const AddBlog = () => {
     const shortDescription = form.shortDescription.value;
     const longDescription = form.longDescription.value;
     const tags = form.tags.value.split(",").map((tag) => tag.trim());
-    const createDate = new Date().toLocaleDateString();
-    const createdTime = new Date().toLocaleTimeString();
+    const createDate = new Date().toISOString().split("T")[0];
+    const createdTime = new Date().toLocaleTimeString("en-US", {
+      hour12: false,
+    }); 
+
     const authorName = user.displayName || "Anonymous";
     const authorEmail = user.email;
 
@@ -45,9 +48,13 @@ const AddBlog = () => {
     };
 
     try {
-      const res = await axios.post("https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/blogs", blogData, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        "https://blog-website-server-side.vercel.app/blogs",
+        blogData,
+        {
+          withCredentials: true,
+        }
+      );
       const newBlog = res.data;
 
       setBlog([...blog, newBlog]);
@@ -58,8 +65,7 @@ const AddBlog = () => {
         text: "Your blog has been added successfully!",
       });
 
-      // Optionally navigate to another page after submission
-      // navigate('/blogs');
+      navigate("/all-blogs");
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -73,7 +79,9 @@ const AddBlog = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4 py-6 lg:py-12 px-6 mb-12 ">
-      <h1 className="text-2xl font-bold mb-6 my-4">Add a New Blog</h1>
+      <h1 className="text-2xl font-bold mb-10 my-6 text-center text-primary">
+        Add a New Blog
+      </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block font-medium">Title</label>

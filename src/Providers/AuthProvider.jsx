@@ -21,30 +21,20 @@ const AuthProviders = ({ children }) => {
   const githubProvider = new GithubAuthProvider();
 
   const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password).finally(() => {
-      setLoading(false);
-    });
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const loginUser = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logout = async () => {
-    try {
-      localStorage.removeItem("token");
-
-      await signOut(auth);
-  
-      setUser(null);
-    } catch (error) {
-      console.error("Error during logout:", error);
-      throw error;
-    }
+  const logout = () => {
+    setLoading(true);
+    return signOut(auth);
   };
-  
 
   const handleGoogleLogin = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
   const handleGithubLogin = () => {
@@ -67,36 +57,41 @@ const AuthProviders = ({ children }) => {
     }
   };
 
-  const resetPassword = async (email) => {
-    try {
-      await sendPasswordResetEmail(auth, email);
-      return "Password reset email sent!";
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  };
-
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        try {
-          const idToken = await currentUser.getIdToken(true);
-          localStorage.setItem("token", idToken);
-        } catch (error) {
-          console.error("Error fetching token:", error);
-        }
-      } else {
-
-        localStorage.removeItem("token");
-      }
-  
       setUser(currentUser);
-      setLoading(false);
+      if (currentUser?.email) {
+        const user = { email: currentUser.email };
+        axios
+          .post("https://blog-website-server-side.vercel.app/jwt", user, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log("JWT received");
+          })
+          .catch((error) => {
+            console.error("JWT fetch error");
+          })
+          .finally(() => setLoading(false));
+      } else {
+        axios
+          .post(
+            "https://blog-website-server-side.vercel.app/logout",
+            {},
+            { withCredentials: true }
+          )
+          .then((res) => {
+            console.log("Logout success");
+          })
+          .catch((error) => {
+            console.error("Logout error");
+          })
+          .finally(() => setLoading(false));
+      }
     });
-  
+
     return () => unSubscribe();
   }, []);
-  
 
   const userInfo = {
     user,
@@ -106,7 +101,6 @@ const AuthProviders = ({ children }) => {
     loginUser,
     logout,
     updateUserProfile,
-    resetPassword,
     setLoading,
     handleGoogleLogin,
     handleGithubLogin,

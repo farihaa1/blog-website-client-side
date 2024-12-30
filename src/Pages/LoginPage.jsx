@@ -9,7 +9,6 @@ const LoginPage = () => {
     handleGoogleLogin,
     loading,
     setLoading,
-    handleGithubLogin,
   } = useContext(AuthContext);
   const [error, setError] = useState("");
   const location = useLocation();
@@ -28,61 +27,13 @@ const LoginPage = () => {
         navigate(from, { replace: true });
       })
       .catch((err) => {
-        console.error("Login error", err.message);
         setError("Invalid email or password");
       });
   };
 
-  const fetchGithubEmail = async (token) => {
-    try {
-      const response = await fetch("https://api.github.com/user/emails", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+  
 
-      if (!response.ok) {
-        throw new Error(
-          `GitHub API Error: ${response.status} ${response.statusText}`
-        );
-      }
-
-      const emails = await response.json();
-
-      if (Array.isArray(emails)) {
-        const primaryEmail = emails.find(
-          (email) => email.primary && email.verified
-        );
-        return primaryEmail?.email || null;
-      }
-
-      throw new Error("Invalid email response format");
-    } catch (error) {
-      console.error("Error fetching GitHub email:", error);
-      throw error;
-    }
-  };
-
-  const handleGithubSignIn = async () => {
-    setLoading(true);
-    try {
-      const res = await handleGithubLogin();
-      const token = res._tokenResponse.oauthAccessToken;
-
-    
-
-      // Fetch user's email if not directly available
-      let email = res.user.email;
-      if (!email) {
-        email = await fetchGithubEmail(token);
-      }
-
-      navigate(from, { replace: true });
-    } catch (err) {
-      console.error("GitHub login error:", err.message);
-      setError("Failed to sign in with GitHub. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  
 
   const handleGoogleSignIn = () => {
     setLoading(true);
@@ -91,7 +42,6 @@ const LoginPage = () => {
         navigate(from, { replace: true });
       })
       .catch((err) => {
-        console.error("Google login error:", err.message);
         setError("Failed to sign in with Google. Please try again.");
       })
       .finally(() => setLoading(false));
@@ -159,14 +109,7 @@ const LoginPage = () => {
               <img className="w-8 h-8" src={googleImg} alt="Google" />
               {loading ? "Signing in..." : "Google"}
             </button>
-            <button
-              onClick={handleGithubSignIn}
-              className="flex justify-center items-center gap-2 bg-base-200 px-4 py-2 rounded-lg mb-6 mt-2 ml-3"
-              disabled={loading}
-            >
-              <img className="w-8 h-8" src={googleImg} alt="GitHub" />
-              {loading ? "Signing in..." : "GitHub"}
-            </button>
+           
           </div>
         </div>
       </div>

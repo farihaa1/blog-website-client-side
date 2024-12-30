@@ -28,7 +28,7 @@ const Newsletter = () => {
   };
 
   return (
-    <div id="newsletter-section" className="max-w-lg lg:max-w-2xl mx-auto py-8 my-8 md:my-12 px-6 ">
+    <div id="newsletter-section" className="max-w-lg  lg:max-w-2xl mx-auto py-8 my-8 md:my-12 px-6 ">
       <h2 className="text-3xl font-bold text-center mb-6">Subscribe to Our Newsletter</h2>
       <p className="text-base text-gray-600 dark:text-gray-300 text-center mb-6 md:mb-16">
       Get the latest updates, news, and exclusive content straight to your inbox. 

@@ -32,15 +32,15 @@ const FeaturedBloggers = () => {
     ];
   
     return (
-      <div className="container mx-auto px-4 lg:px-6 py-8">
-        <h2 className="text-2xl md:text-4xl font-semibold mb-6">
-          Meet Our Featured Bloggers
+      <div className="container mx-auto px-6 lg:px-16 py-8">
+        <h2 className="text-2xl md:text-4xl font-semibold mb-6 text-center lg:mb-8">
+          Meet Our <span className="text-primary">Featured</span> Bloggers
         </h2>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 pt-4 pb-12">
+        <div className="flex flex-wrap gap-6 pt-4 pb-12 justify-center">
           {bloggers.map((blogger) => (
             <div
               key={blogger.id}
-              className="border rounded-lg p-4 shadow-lg flex flex-col items-center md:p-8"
+              className="border rounded-lg p-4 shadow-lg flex flex-col items-center md:p-8 w-64"
             >
               <img
                 src={blogger.profileImage}

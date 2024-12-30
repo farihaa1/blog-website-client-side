@@ -24,16 +24,15 @@ const UpdateBlogPage = () => {
     const fetchBlogData = async () => {
       try {
         const res = await axios.get(
-          `https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/blogs/${params.id}`,
+          `https://blog-website-server-side.vercel.app/blogs/${params.id}`,
           {
             withCredentials: true,
           }
         );
         setBlogData(res.data);
       } catch (error) {
-        console.error("Error fetching blog data:", error);
         Swal.fire("Error", "Failed to load blog data", "error");
-        navigate("/blogs"); // Redirect if the blog isn't found
+        navigate("/blogs"); 
       }
     };
     fetchBlogData();
@@ -58,13 +57,13 @@ const UpdateBlogPage = () => {
     setLoading(true);
     try {
       const res = await axios.put(
-        `https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/blogs/${params.id}`,
+        `https://blog-website-server-side.vercel.app/blogs/${params.id}`,
         updatedData
       );
       Swal.fire("Success", "Blog updated successfully", "success");
       navigate(`/blogs/${params.id}`);
     } catch (error) {
-      console.error("Error updating blog:", error);
+     
       Swal.fire("Error", "Failed to update blog", "error");
     } finally {
       setLoading(false);

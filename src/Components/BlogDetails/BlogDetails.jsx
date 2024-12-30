@@ -17,7 +17,7 @@ const BlogDetails = () => {
 
   const fetchComments = async () => {
     const res = await axios.get(
-      `https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/comments/${blogDetails._id}`
+      `https://blog-website-server-side.vercel.app/comments/${blogDetails._id}`
     );
     setComments(res.data);
   };
@@ -35,7 +35,7 @@ const BlogDetails = () => {
     };
 
     try {
-      await axios.post("https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/comments", commentData);
+      await axios.post("https://blog-website-server-side.vercel.app/comments", commentData);
       setNewComment("");
       fetchComments();
       Swal.fire("Success", "Comment added successfully", "success");
@@ -74,8 +74,8 @@ const BlogDetails = () => {
 
       <div className=" flex gap-3 justify-between">
         <p className="text-gray-600">Category: {blogDetails.category}</p>
-        {blogDetails.createDate && (
-          <p className="text-gray-600">Created At: {blogDetails.createDate}</p>
+        {blogDetails.createdDate && (
+          <p className="text-gray-600">{blogDetails.createdDate}</p>
         )}
       </div>
 

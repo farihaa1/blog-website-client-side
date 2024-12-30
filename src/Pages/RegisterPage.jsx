@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProvider";
+import axios from "axios";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
-
+const [error, setError] = useState('')
 
   const [loading, setLoading] = useState(false);
 
@@ -22,11 +23,7 @@ const RegisterPage = () => {
     const fullPasswordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{6,}$/;
     if (!fullPasswordRegex.test(password)) {
-      Swal.fire({
-        icon: "warning",
-        title: "Weak Password",
-        text: "Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 6 characters long.",
-      });
+      setError("Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 6 characters long.")
       setLoading(false);
       return;
     }
@@ -39,7 +36,7 @@ const RegisterPage = () => {
 
             axios
               .post(
-                "https://chill-gamer-server-side-jet.vercel.app/users",
+                "https://blog-website-server-side.vercel.app/users",
                 newUser
               )
               .then((res) => {
@@ -58,7 +55,6 @@ const RegisterPage = () => {
                 }
               })
               .catch((err) => {
-                console.error("Database error:", err);
                 Swal.fire({
                   icon: "error",
                   title: "Oops...",
@@ -68,7 +64,6 @@ const RegisterPage = () => {
               .finally(() => setLoading(false));
           })
           .catch((error) => {
-            console.error("Error updating profile:", error);
             Swal.fire({
               icon: "error",
               title: "Oops...",
@@ -78,7 +73,6 @@ const RegisterPage = () => {
           });
       })
       .catch((err) => {
-        console.error("Firebase error:", err);
         Swal.fire({
           icon: "error",
           title: "Oops...",

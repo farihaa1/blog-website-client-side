@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import Skeleton from "react-loading-skeleton"; // Import the Skeleton component
 
 const AllBlogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -24,7 +25,7 @@ const AllBlogs = () => {
   const fetchBlogs = async () => {
     try {
       const response = await fetch(
-        `https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/blogs?search=${search}&category=${category}`,
+        `https://blog-website-server-side.vercel.app/blogs?search=${search}&category=${category}`,
         {
           withCredentials: true,
         }
@@ -32,7 +33,7 @@ const AllBlogs = () => {
       const data = await response.json();
       setBlogs(data);
     } catch (error) {
-      console.error("Error fetching blogs:", error);
+      console.error("Error fetching blogs");
     } finally {
       setLoading(false);
     }
@@ -44,13 +45,13 @@ const AllBlogs = () => {
         icon: "error",
         text: "Please log in to add blogs to your wishlist.",
       });
-      navigate('/sign-in')
+      navigate("/sign-in");
       return;
     }
 
     try {
-      await axios.post(
-        "https://blog-website-server-side-9ia7inx76-fariha14s-projects.vercel.app/wishlist",
+      const res = await axios.post(
+        "https://blog-website-server-side.vercel.app/wishlist",
         {
           userEmail: user?.email,
           blogId,
@@ -59,28 +60,27 @@ const AllBlogs = () => {
           withCredentials: true,
         }
       );
-      Swal.fire({
-        icon: "success",
-        title: "Added to Wishlist",
-        text: "The blog has been added to your wishlist successfully.",
-        timer: 2000,
-        showConfirmButton: false,
-      });
-    } catch (error) {
-      if (error.response && error.response.status === 409) {
+      if (res.data.message === "Blog is already in the wishlist") {
         Swal.fire({
-          icon: "error",
           title: "Already Exists",
           text: "This blog is already in your wishlist.",
         });
       } else {
-        console.error("Unexpected error:", error); // Log only unexpected errors
         Swal.fire({
-          icon: "error",
-          title: "Failed",
-          text: "There was an error adding the blog to your wishlist.",
+          icon: "success",
+          title: "Added to Wishlist",
+          text: "The blog has been added to your wishlist successfully.",
+          timer: 2000,
+          showConfirmButton: false,
         });
       }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Failed",
+        text: "There was an error adding the blog to your wishlist.",
+      });
     }
   };
 
@@ -88,65 +88,74 @@ const AllBlogs = () => {
     <div className="max-w-6xl mx-auto p-6 py-8 lg:py-12">
       <h1 className="text-3xl font-bold mb-4">All Blogs</h1>
 
-      {/* Search and Category Filter */}
       <div className="flex items-center space-x-4 mb-6">
         <input
           type="text"
           placeholder="Search blogs by title"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border p-2 rounded w-full"
+          className="border p-1 px-4 rounded w-full input input-bordered text-gray-500"
         />
+
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="border p-2 rounded"
+          className="border  p-2 rounded  px-4 input input-bordered text-gray-500 select w-56"
         >
-          <option value="All">All Categories</option>
-          <option value="Technology">Technology</option>
-          <option value="Health">Health</option>
-          <option value="Lifestyle">Lifestyle</option>
-          <option value="Education">Education</option>
+          <option className="input text-gray-500 my-1  px-4 py-1 hover:bg-primary hover:text-white" value="All">All Categories</option>
+          <option className="input text-gray-500 my-1  px-4 py-1 hover:bg-primary hover:text-white" value="Technology">Technology</option>
+          <option className="input text-gray-500 my-1  px-4 py-1 hover:bg-primary hover:text-white" value="Health">Health</option>
+          <option className="input text-gray-500 my-1  px-4 py-1 hover:bg-primary hover:text-white" value="Lifestyle">Lifestyle</option>
+          <option className="input text-gray-500 my-1  px-4 py-1 hover:bg-primary hover:text-white" value="Education">Education</option>
+          <option className="input text-gray-500 my-1  px-4 py-1 hover:bg-primary hover:text-white" value="Travel">Travel</option>
         </select>
+        
       </div>
       {loading ? (
-        <div className=" flex justify-center items-center h-80 mt-3 mb-6">
-          <progress className="progress w-56"></progress>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, index) => (
+            <div key={index} className="border rounded p-4 shadow">
+              <Skeleton height={200} />
+              <Skeleton count={2} />
+              <Skeleton width="60%" />
+            </div>
+          ))}
         </div>
-      ): <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {blogs.map((blog) => (
-        <div key={blog._id} className="border rounded p-4 shadow ">
-          <img
-            src={blog.imageUrl || "https://via.placeholder.com/150"}
-            alt={blog.title || "Blog Image"}
-            className="w-full h-48 object-cover rounded"
-          />
-          <h2 className="text-xl font-bold mt-4">{blog.title}</h2>
-          <p className="text-gray-600">{blog.shortDescription}</p>
-          <p className="mt-2 text-sm text-gray-500">
-            Category: {blog.category}
-          </p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blogs?.map((blog) => (
+            <div key={blog._id} className="border rounded p-4 shadow ">
+              <img
+                src={blog.imageUrl}
+                alt={blog.title || "Blog Image"}
+                className="w-full h-48 object-cover rounded"
+              />
+              <h2 className="text-xl font-bold mt-4">{blog.title}</h2>
+              <p className="text-gray-600">
+                {blog.shortDescription.slice(0, 250)}...
+              </p>
+              <p className="mt-2 text-sm text-gray-500">
+                Category: {blog.category}
+              </p>
 
-          <div className="flex justify-between mt-4">
-            <button
-              onClick={() => navigate(`/blogs/${blog._id}`)}
-              className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-              Details
-            </button>
-            <button
-              onClick={() => handleAddToWishlist(blog._id)}
-              className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-            >
-              Add to Wishlist
-            </button>
-          </div>
+              <div className="flex justify-between mt-4">
+                <button
+                  onClick={() => navigate(`/blogs/${blog._id}`)}
+                  className="bg-primary text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                  Details
+                </button>
+                <button
+                  onClick={() => handleAddToWishlist(blog._id)}
+                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                >
+                  Add to Wishlist
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>}
-
-   
-     
+      )}
     </div>
   );
 };

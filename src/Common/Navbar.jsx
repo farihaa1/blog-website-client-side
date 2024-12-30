@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa6";
-import { CiSearch } from "react-icons/ci";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import { ImCross } from "react-icons/im";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -19,7 +19,6 @@ const Navbar = () => {
     });
   };
 
-
   const Links = (
     <>
       <li>
@@ -27,7 +26,9 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             `px-4 py-2 rounded-lg ${
-              isActive ? "bg-btn1 text-white font-semibold" : "text-gray-600"
+              isActive
+                ? "bg-btn1 text-white font-semibold"
+                : "text-gray-500 lg:text-gray-400 "
             }`
           }
         >
@@ -39,7 +40,9 @@ const Navbar = () => {
           to="/add-blog"
           className={({ isActive }) =>
             `px-4 py-2 rounded-lg ${
-              isActive ? "bg-btn1 text-white font-semibold" : "text-gray-600"
+              isActive
+                ? "bg-btn1 text-white font-semibold"
+                : "text-gray-500 lg:text-gray-400 "
             }`
           }
         >
@@ -50,8 +53,10 @@ const Navbar = () => {
         <NavLink
           to="/all-blogs"
           className={({ isActive }) =>
-            `px-4 py-2 rounded-lg ${
-              isActive ? "bg-btn1 text-white font-semibold" : "text-gray-600"
+            `px-4 py-2 rounded-lg  ${
+              isActive
+                ? "bg-btn1 text-white font-semibold"
+                : "text-gray-500 lg:text-gray-400 "
             }`
           }
         >
@@ -63,31 +68,39 @@ const Navbar = () => {
           to="/featured-blogs"
           className={({ isActive }) =>
             `px-4 py-2 rounded-lg ${
-              isActive ? "bg-btn1 text-white font-semibold" : "text-gray-600"
+              isActive
+                ? "bg-btn1 text-white font-semibold"
+                : "text-gray-500 lg:text-gray-400 "
             }`
           }
         >
           Featured Blogs
         </NavLink>
       </li>
-      {
-        user && <li>
-        <NavLink
-          to={`/wishlist/${user?.email}`}
-          className={({ isActive }) =>
-            `px-4 py-2 rounded-lg ${
-              isActive ? "bg-btn1 text-white font-semibold" : "text-gray-600"
-            }`
-          }
-        >
-          Wishlist
-        </NavLink>
-      </li>
-      }
+      {user && (
+        <li>
+          <NavLink
+            to={`/wishlist/${user?.email}`}
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-lg ${
+                isActive
+                  ? "bg-btn1 text-white font-semibold"
+                  : "text-gray-500 lg:text-gray-400 "
+              }`
+            }
+          >
+            Wishlist
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
-    <div className=" bg-white font-poppins py-2 lg:px-10 ">
+    <motion.div
+      animate={{ y: [-100, 0] }}
+      transition={{ duration: 2 }}
+      className=" bg-base-content text-base-300 font-poppins py-2 lg:px-10 "
+    >
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -103,21 +116,13 @@ const Navbar = () => {
           </div>
           <Link
             to="/"
-            className=" text-2xl md:text-3xl font-bold text-blue-950 font-inter"
+            className=" text-2xl md:text-3xl font-bold text-white font-inter"
           >
             Blog Website
           </Link>
         </div>
 
         <div className="navbar-end">
-          <div className="flex justify-center items-center mr-2 md:mr-4 relative">
-            <CiSearch className="absolute left-3 text-gray-400 font-bold text-lg" />
-            <input
-              placeholder="search"
-              className="w-44 md:w-64 border px-2 py-1 pl-8 rounded-xl border-gray-200 input input-bordered h-8 md:h-10 bg-base-200"
-              type="text"
-            />
-          </div>
           {user ? (
             <div>
               <div
@@ -185,13 +190,12 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      <div className="divider mt-2 container mx-auto "></div>
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         <div className="navbar-center hidden lg:flex py-2 pb-6">
-          <ul className="menu-horizontal px-1 gap-2">{Links}</ul>
+          <ul className="menu-horizontal px-1 gap-4">{Links}</ul>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
