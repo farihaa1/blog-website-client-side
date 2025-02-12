@@ -74,11 +74,11 @@ const FeaturedBlogs = () => {
   );
 
   return (
-    <div className="px-6 lg:px-16 py-16 min-h-screen">
+    <div className="px-6 lg:px-16 py-16">
      
       <div className="flex flex-row gap-4 mb-6">
         <div className="flex flex-col md:items-center gap-2 w-full justify-center">
-          <label className="md:text-lg font-medium">Filter by Category:</label>
+          <label className="md:text-lg font-medium dark:text-gray-300">Filter by Category:</label>
           <select
             className="input w-full input-bordered select  text-base  focus:ring focus:ring-indigo-300"
             value={categoryFilter}
@@ -93,7 +93,7 @@ const FeaturedBlogs = () => {
           </select>
         </div>
         <div className="flex flex-col md:items-center gap-2 w-full justify-center">
-          <label className=" md:text-lg font-medium">Filter by Word Count:</label>
+          <label className=" md:text-lg font-medium dark:text-gray-300">Filter by Word Count:</label>
           <select
             className="input w-full input-bordered select  text-base focus:ring focus:ring-indigo-300"
             value={wordCountFilter}
@@ -132,7 +132,7 @@ const FeaturedBlogs = () => {
             {table.getRowModel().rows.map((row) => (
               <tr
                 key={row.id}
-                className="even:bg-gray-100 hover:bg-indigo-50 transition"
+                className="even:bg-gray-100 dark:even:bg-gray-300 dark:odd:bg-indigo-50 odd:bg-indigo-50 transition"
               >
                 {row.getVisibleCells().map((cell) => (
                   <td

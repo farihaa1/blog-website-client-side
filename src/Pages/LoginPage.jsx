@@ -51,15 +51,15 @@ const LoginPage = () => {
     <div className="hero min-h-screen">
       <div className="hero-content flex-col">
         <div className="text-center">
-          <h1 className="text-4xl font-bold">Welcome Back!</h1>
-          <p className="py-6 w-8/12 mx-auto">
+          <h1 className="text-4xl font-bold dark:text-gray-200">Welcome Back!</h1>
+          <p className="py-6 w-8/12 mx-auto dark:text-gray-400">
             Log in to your account to access your dashboard, manage your posts,
             and interact with the community.
           </p>
         </div>
-        <div className="card w-full max-w-sm shrink-0 shadow-2xl">
-          <form onSubmit={handleLogin} className="card-body">
-            <div className="form-control">
+        <div className=" w-full max-w-sm shrink-0 shadow-2xl ">
+          <form onSubmit={handleLogin} className="card-body  w-full">
+            <div className="form-control w-full">
               <label className="label">
                 <span className="label-text dark:text-white">Email</span>
               </label>
@@ -67,7 +67,7 @@ const LoginPage = () => {
                 type="email"
                 placeholder="Email"
                 name="email"
-                className="input input-bordered dark:bg-gray-800 dark:text-gray-300"
+                className="input input-bordered dark:bg-gray-800 dark:border-gray-600 w-full dark:text-gray-300"
                 required
               />
             </div>
@@ -79,7 +79,7 @@ const LoginPage = () => {
                 type="password"
                 placeholder="Password"
                 name="password"
-                className="input input-bordered dark:bg-gray-800 dark:text-gray-300"
+                className="input input-bordered dark:bg-gray-800 dark:border-gray-600 w-full dark:text-gray-300"
                 required
               />
               <label className="label">
@@ -95,7 +95,7 @@ const LoginPage = () => {
               )}
             </div>
             <div className="form-control mt-6">
-              <button className="btn bg-primary text-white">Login</button>
+              <button className="btn bg-primary text-white border-none">Login</button>
             </div>
           </form>
           <div className="divider mx-10"></div>

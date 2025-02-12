@@ -18,7 +18,7 @@ const Footer = () => {
         </Link>
       </nav>
       <nav>
-        <h6 className="text-lg font-semibold text-gray-300">Company</h6>
+        <h6 className="text-lg font-semibold text-gray-300">Others</h6>
         <Link to="/add-blog" className="link link-hover">
           Add blog
         </Link>

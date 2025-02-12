@@ -24,11 +24,11 @@ const Banner = () => {
       <div>
         <div>
           <div className="flex flex-col items-center md:items-start md:justify-center max-w-lg mx-auto px-2 md:pl-10">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5 text-center md:text-start text-blue-950">
+            <h1 className="heading1">
               Welcome to <br />
               Our Blog!
             </h1>
-            <p className="text-sm md:text-[17px] lg:text-xl mb-6 text-text text-center md:items-start md:text-start max-w-md md:max-w-4xl mx-auto">
+            <p className="para">
               Explore insightful articles, expert tips, in-depth guides, and the
               latest trends in technology, lifestyle, and more.
             </p>

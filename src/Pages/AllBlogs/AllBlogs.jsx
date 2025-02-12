@@ -85,8 +85,8 @@ const AllBlogs = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 py-8 lg:py-12">
-      <h1 className="text-3xl font-bold mb-4">All Blogs</h1>
+    <div className="max-w-full mx-auto p-6 py-8 lg:py-12">
+      <h1 className="heading3 mb-4">All Blogs</h1>
 
       <div className="flex items-center space-x-4 mb-6">
         <input
@@ -112,9 +112,9 @@ const AllBlogs = () => {
         
       </div>
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="card ">
           {[...Array(6)].map((_, index) => (
-            <div key={index} className="border rounded p-4 shadow">
+            <div key={index} className="border rounded p-4 shadow dark:bg-gray-700">
               <Skeleton height={200} />
               <Skeleton count={2} />
               <Skeleton width="60%" />
@@ -122,21 +122,22 @@ const AllBlogs = () => {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="card">
           {blogs?.map((blog) => (
-            <div key={blog._id} className="border rounded p-4 shadow ">
+            <div key={blog._id} className="card-details">
               <img
                 src={blog.imageUrl}
                 alt={blog.title || "Blog Image"}
                 className="w-full h-48 object-cover rounded"
               />
-              <h2 className="text-xl font-bold mt-4">{blog.title}</h2>
-              <p className="text-gray-600">
-                {blog.shortDescription.slice(0, 250)}...
+               <p className="my-3 pr-2 text-sm text-gray-500 dark:text-gray-400 text-end">
+                {blog.category}
               </p>
-              <p className="mt-2 text-sm text-gray-500">
-                Category: {blog.category}
+              <h2 className="text-xl font-bold mt-4 mb-2">{blog.title}</h2>
+              <p className="para text-start">
+                {blog.shortDescription.slice(0, 150)}...
               </p>
+             
 
               <div className="flex justify-between mt-4">
                 <button

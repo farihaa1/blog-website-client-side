@@ -78,8 +78,8 @@ const AddBlog = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 py-6 lg:py-12 px-6 mb-12 ">
-      <h1 className="text-2xl font-bold mb-10 my-6 text-center text-primary">
+    <div className="max-w-4xl mx-auto p-4 py-6 lg:py-12 px-6 mb-12 dark:text-gray-300 ">
+      <h1 className="text-2xl font-bold mb-10 my-6 text-center text-primary ">
         Add a New Blog
       </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -88,7 +88,7 @@ const AddBlog = () => {
           <input
             type="text"
             name="title"
-            className="w-full border border-gray-300 p-2"
+            className="w-full input input-bordered rounded border-gray-300 dark:text-gray-600 p-2"
             required
           />
         </div>
@@ -97,15 +97,15 @@ const AddBlog = () => {
           <input
             type="url"
             name="imageUrl"
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full input input-bordered rounded dark:text-gray-600 border-gray-300 p-2"
             required
           />
         </div>
-        <div>
-          <label className="block font-medium">Category</label>
+        <div className="">
+          <label className="block font-medium ">Category</label>
           <select
             name="category"
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full input input-bordered  border-gray-300 dark:text-gray-600 p-2 rounded"
           >
             <option value="Technology">Technology</option>
             <option value="Health">Health</option>
@@ -119,7 +119,7 @@ const AddBlog = () => {
           <textarea
             name="shortDescription"
             rows="3"
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full input input-bordered dark:text-gray-600 border-gray-300 p-2 rounded"
             required
           />
         </div>
@@ -128,7 +128,7 @@ const AddBlog = () => {
           <textarea
             name="longDescription"
             rows="6"
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full input input-bordered textarea dark:text-gray-600 border-gray-300 p-2 rounded"
             required
           />
         </div>
@@ -137,7 +137,7 @@ const AddBlog = () => {
           <input
             type="text"
             name="tags"
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full border dark:text-gray-600 border-gray-300 p-2 rounded"
             placeholder="e.g. React, JavaScript, Web Development"
           />
         </div>

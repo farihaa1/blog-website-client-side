@@ -87,10 +87,10 @@ const WishList = () => {
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 justify-center items-center">
           {wishlist.map((blog) => (
-            <div key={blog._id} className="border shadow-lg rounded p-8">
-              <h3 className="text-xl font-semibold">{blog.title}</h3>
-              <p className="text-gray-600 mt-2">Category: {blog.category}</p>
-              <p className="text-gray-600">Author: {blog.authorName}</p>
+            <div key={blog._id} className="border shadow-lg rounded p-8 dark:border-gray-700 dark:bg-gray-900/30">
+              <h3 className="text-xl font-semibold dark:text-gray-300">{blog.title}</h3>
+              <p className="text-gray-600 dark:text-gray-400 mt-2">Category: {blog.category}</p>
+              <p className="text-gray-600 dark:text-gray-400">Author: {blog.authorName}</p>
               <div className="flex justify-between items-center mt-4 flex-wrap gap-2 ">
                 <button
                   className="bg-primary text-white px-3 py-2 rounded"
@@ -102,7 +102,7 @@ const WishList = () => {
                   className="bg-red-400 text-white px-4 py-2 rounded"
                   onClick={() => handleRemoveFromWishlist(blog._id)}
                 >
-                  Remove from Wishlist
+                  Remove
                 </button>
               </div>
             </div>

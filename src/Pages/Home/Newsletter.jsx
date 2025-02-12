@@ -28,9 +28,9 @@ const Newsletter = () => {
   };
 
   return (
-    <div id="newsletter-section" className="max-w-lg  lg:max-w-2xl mx-auto py-8 my-8 md:my-12 px-6 ">
-      <h2 className="text-3xl font-bold text-center mb-6">Subscribe to Our Newsletter</h2>
-      <p className="text-base text-gray-600 dark:text-gray-300 text-center mb-6 md:mb-16">
+    <div id="newsletter-section" className="max-w-lg  lg:max-w-2xl mx-auto pb-8 mb-8 md:mb-12 px-6 ">
+      <h2 className="text-3xl font-bold text-center mb-6 dark:text-gray-200">Subscribe to Our Newsletter</h2>
+      <p className="para text-gray-600 text-center mb-6 md:mb-16">
       Get the latest updates, news, and exclusive content straight to your inbox. 
       Don’t miss out on important announcements and exciting new blogs.</p>
       <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4">
@@ -39,7 +39,7 @@ const Newsletter = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
-          className="w-full max-w-md px-4 py-2 border rounded text-gray-700 dark:text-gray-300 dark:bg-gray-800 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full max-w-md px-4 py-2 border rounded text-gray-700 dark:text-gray-300 dark:bg-gray-800 border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
         <button

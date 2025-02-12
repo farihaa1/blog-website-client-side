@@ -73,12 +73,12 @@ const RecentBlogs = () => {
     <motion.div
       animate={{ y: [290, 25, 20] }}
       transition={{ delay: 1, duration: 4 }}
-      className="container mx-auto px-6 lg:px-16 min-h-screen"
+      className="container mx-auto px-6 lg:px-16 min-h-full pb-12"
     >
-      <h1 className="text-3xl md:text-4xl font-semibold pb-6 text-primary">
+      <h1 className="text-3xl md:text-4xl pb-6 lg:pb-12 font-semibold  text-primary">
         Recent Blogs
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 min-h-max">
+      <div className="card min-h-max">
         {loading
           ? Array.from({ length: 6 }).map((_, idx) => (
               <div key={idx} className="border rounded p-4 shadow">
@@ -93,19 +93,20 @@ const RecentBlogs = () => {
               </div>
             ))
           : recentBlogs.map((blog) => (
-              <div key={blog._id} className="border rounded p-4 shadow">
+              <div key={blog._id} className="card-details shadow">
                 <img
                   src={blog.imageUrl || "https://via.placeholder.com/150"}
                   alt={blog.title || "Blog Image"}
                   className="w-full h-56 md:h-48 object-cover object-top rounded"
                 />
-                <h2 className="text-xl font-bold mt-4">{blog.title}</h2>
-                <p className="text-gray-600 pt-1 md:pt-2">
+                <p className="para-2 text-end">
+                 {blog.category}
+                </p>
+                <h2 className="heading2">{blog.title}</h2>
+                <p className="para-2 pt-2">
                   {blog.shortDescription.slice(0, 200)}....
                 </p>
-                <p className="mt-2 text-sm text-gray-500">
-                  Category: {blog.category}
-                </p>
+                
                 <div className="flex justify-between mt-4">
                   <Link
                     to={`/blogs/${blog._id}`}

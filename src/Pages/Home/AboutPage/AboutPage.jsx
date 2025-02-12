@@ -3,25 +3,25 @@ import { motion } from "framer-motion";
 
 const AboutPage = () => {
   return (
-    <div className=" bg-base-content ">
+    <div className=" bg-base-content">
       <motion.div
         animate={{ y: [170, 25, 10] }}
         transition={{ delay: 2, duration: 4 }}
         className=" container mx-auto px-6 py-8 lg:py-16 my-16 flex flex-col gap-6 lg:px-24 text-base-300 "
       >
         <div className="flex flex-col justify-center items-center my-2 pb-4">
-          <h4 className="text-2xl md:text-4xl font-semibold text-center mb-6">
+          <h4 className="heading3 text-center mb-6">
             Create, Share, and Engage with <br />{" "}
             <span className="text-btn1">Blog Website</span>
           </h4>
-          <p className=" mb-8 max-w-2xl text-center">
-            BlogWeb is more than just a blog platform; it's a community where
+          <p className="mb-4 max-w-2xl text-center text-gray-400">
+            BlogWeb is more than just a blog platform. it's a community where
             creators, writers, and readers come together to share ideas,
             stories, and knowledge.
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4 md:gap-8 mb-12 py-4 it">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-8 mb-12 py-4 ">
           <figure className="md:w-2/5 md:px-4 md:mr-6">
             <img
               src="https://i.ibb.co.com/pwgBBWQ/pngtree-blogging-concept-picture-writer-laptop-png-image-5722986.png"
