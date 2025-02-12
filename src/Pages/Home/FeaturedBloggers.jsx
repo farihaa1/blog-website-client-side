@@ -40,7 +40,7 @@ const FeaturedBloggers = () => {
           {bloggers.map((blogger) => (
             <div
               key={blogger.id}
-              className="border rounded-lg p-4 shadow-lg flex flex-col items-center md:p-8 w-64"
+              className="border rounded p-4 shadow-lg flex flex-col items-center md:p-8 w-64"
             >
               <img
                 src={blogger.profileImage}

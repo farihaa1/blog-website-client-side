@@ -88,7 +88,7 @@ const AddBlog = () => {
           <input
             type="text"
             name="title"
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full border border-gray-300 p-2"
             required
           />
         </div>

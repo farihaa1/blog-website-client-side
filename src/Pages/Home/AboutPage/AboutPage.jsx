@@ -26,7 +26,7 @@ const AboutPage = () => {
             <img
               src="https://i.ibb.co.com/pwgBBWQ/pngtree-blogging-concept-picture-writer-laptop-png-image-5722986.png"
               alt="Powerful Blogs"
-              className="w-full h-auto rounded-lg shadow-lg"
+              className="w-full h-auto rounded shadow-lg"
             />
           </figure>
           <div className="flex-1 lg:ml-12">
@@ -71,7 +71,7 @@ const AboutPage = () => {
             <img
               src="https://i.ibb.co.com/tYDYQqR/images-q-tbn-ANd9-Gc-RYLdw7-K5a-Jv1y5-LY4v83m-R0-Xeg-Str-UIkbp-XQ-s.png"
               alt="Real-Time Collaboration"
-              className="w-full h-auto rounded-lg shadow-lg"
+              className="w-full h-auto rounded shadow-lg"
             />
           </figure>
           <div className="flex-1">
@@ -105,7 +105,7 @@ const AboutPage = () => {
             <img
               src="https://i.ibb.co.com/KFXm3ps/5-Great-Ways-1024x657.jpg"
               alt="Organized Workspaces"
-              className="w-full h-auto rounded-lg shadow-lg"
+              className="w-full h-auto rounded shadow-lg"
             />
           </figure>
           <div className="flex-1 lg:ml-12">
@@ -140,7 +140,7 @@ const AboutPage = () => {
           </p>
           <a
             href="/sign-in"
-            className="bg-primary w-52 mx-auto text-white px-6 py-3 rounded-lg"
+            className="bg-primary w-52 mx-auto text-white px-6 py-3 rounded"
           >
             Start Writing Now
           </a>

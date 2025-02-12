@@ -81,7 +81,7 @@ const RecentBlogs = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 min-h-max">
         {loading
           ? Array.from({ length: 6 }).map((_, idx) => (
-              <div key={idx} className="border rounded-lg p-4 shadow">
+              <div key={idx} className="border rounded p-4 shadow">
                 <Skeleton height={200} className="rounded" />
                 <Skeleton height={24} width="70%" className="mt-4" />
                 <Skeleton height={20} width="90%" className="mt-2" />
@@ -93,7 +93,7 @@ const RecentBlogs = () => {
               </div>
             ))
           : recentBlogs.map((blog) => (
-              <div key={blog._id} className="border rounded-lg p-4 shadow">
+              <div key={blog._id} className="border rounded p-4 shadow">
                 <img
                   src={blog.imageUrl || "https://via.placeholder.com/150"}
                   alt={blog.title || "Blog Image"}

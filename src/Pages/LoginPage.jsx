@@ -103,7 +103,7 @@ const LoginPage = () => {
             
             <button
               onClick={handleGoogleSignIn}
-              className="flex justify-center items-center gap-2 bg-base-200 px-4 py-2 rounded-lg mb-6 mt-2"
+              className="flex justify-center items-center gap-2 bg-base-200 px-4 py-2 rounded mb-6 mt-2"
               disabled={loading}
             >
               <img className="w-8 h-8" src={googleImg} alt="Google" />

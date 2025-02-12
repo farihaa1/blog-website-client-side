@@ -62,7 +62,7 @@ const BlogDetails = () => {
         {blogDetails.tags.map((tag, idx) => (
           <p
             key={idx}
-            className="bg-red-400 text-xs md:text-sm text-base-200 px-4 py-1 rounded-xl"
+            className="bg-red-400 text-xs md:text-sm text-base-200 px-4 py-1 rounded text-center"
           >
             {" "}
             {tag}
@@ -119,11 +119,11 @@ const BlogDetails = () => {
             ? comments.map((comment) => (
                 <div key={comment._id} className="mb-4 border-b pb-4">
                   <div className="flex items-center mb-2">
-                    <img
-                      src={comment.userProfilePicture || "https://i.ibb.co.com/Yj9hZGn/3135715.png"} // Fallback image
+                    {comment.userProfilePicture? <img
+                      src={comment.userProfilePicture}
                       alt={comment.userName}
                       className="w-8 h-8 rounded-full mr-2"
-                    />
+                    />:<div className="w-8 h-8 rounded-full mr-2 bg-primary/60 flex justify-center items-center text-white"><p>{comment.userName.slice(0,1)}</p> </div>}
                     <span className="font-medium">{comment.userName}</span>
                   </div>
                   <p>{comment.content}</p>

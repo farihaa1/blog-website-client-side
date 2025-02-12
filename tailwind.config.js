@@ -16,7 +16,7 @@ export default {
         base: "#87879B",
         bg:"#F9F8FF",
         black: "#181D14",
-        btn1: "#FF5480"
+        btn1: "#5E5AD5"
       },
     },
   },
