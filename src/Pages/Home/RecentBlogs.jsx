@@ -13,11 +13,11 @@ const RecentBlogs = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("https://blog-website-server-side.vercel.app/recent-blogs")
+    fetch("http://localhost:5000/recent-blogs")
       .then((res) => res.json())
       .then((data) => {
         setRecentBlogs(data);
-        setLoading(false); // Stop loading after data fetch
+        setLoading(false); 
       })
       .catch((error) => {
         console.error("Error fetching recent blogs:", error);
@@ -36,7 +36,7 @@ const RecentBlogs = () => {
 
     try {
       const res = await axios.post(
-        "https://blog-website-server-side.vercel.app/wishlist",
+        "http://localhost:5000/wishlist",
         {
           userEmail: user?.email,
           blogId,
@@ -60,7 +60,7 @@ const RecentBlogs = () => {
         });
       }
     } catch (error) {
-      console.error("Unexpected error:", error); // Log only unexpected errors
+      console.error("Unexpected error:", error);
       Swal.fire({
         icon: "error",
         title: "Failed",

@@ -25,7 +25,7 @@ const AllBlogs = () => {
   const fetchBlogs = async () => {
     try {
       const response = await fetch(
-        `https://blog-website-server-side.vercel.app/blogs?search=${search}&category=${category}`,
+        `http://localhost:5000/blogs?search=${search}&category=${category}`,
         {
           withCredentials: true,
         }
@@ -51,7 +51,7 @@ const AllBlogs = () => {
 
     try {
       const res = await axios.post(
-        "https://blog-website-server-side.vercel.app/wishlist",
+        "http://localhost:5000/wishlist",
         {
           userEmail: user?.email,
           blogId,

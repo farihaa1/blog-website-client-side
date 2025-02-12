@@ -17,7 +17,7 @@ const BlogDetails = () => {
 
   const fetchComments = async () => {
     const res = await axios.get(
-      `https://blog-website-server-side.vercel.app/comments/${blogDetails._id}`
+      `http://localhost:5000/comments/${blogDetails._id}`
     );
     setComments(res.data);
   };
@@ -35,7 +35,7 @@ const BlogDetails = () => {
     };
 
     try {
-      await axios.post("https://blog-website-server-side.vercel.app/comments", commentData);
+      await axios.post("http://localhost:5000/comments", commentData);
       setNewComment("");
       fetchComments();
       Swal.fire("Success", "Comment added successfully", "success");

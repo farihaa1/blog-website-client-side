@@ -63,11 +63,11 @@ const AuthProviders = ({ children }) => {
       if (currentUser?.email) {
         const user = { email: currentUser.email };
         axios
-          .post("https://blog-website-server-side.vercel.app/jwt", user, {
+          .post("http://localhost:5000/jwt", user, {
             withCredentials: true,
           })
           .then((res) => {
-            console.log("JWT received");
+           
           })
           .catch((error) => {
             console.error("JWT fetch error");
@@ -76,12 +76,12 @@ const AuthProviders = ({ children }) => {
       } else {
         axios
           .post(
-            "https://blog-website-server-side.vercel.app/logout",
+            "http://localhost:5000/logout",
             {},
             { withCredentials: true }
           )
           .then((res) => {
-            console.log("Logout success");
+            
           })
           .catch((error) => {
             console.error("Logout error");

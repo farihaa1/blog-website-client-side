@@ -99,7 +99,7 @@ const Navbar = () => {
     <motion.div
       animate={{ y: [-100, 0] }}
       transition={{ duration: 2 }}
-      className=" bg-base-content text-base-300 font-poppins py-2 lg:px-10 "
+      className=" bg-base-content sticky top-0 z-10 text-base-300 font-poppins py-2 lg:px-10 "
     >
       <div className="navbar container mx-auto">
         <div className="navbar-start">

@@ -16,7 +16,7 @@ const WishList = () => {
 
   useEffect(() => {
     axios
-      .get(`https://blog-website-server-side.vercel.app/wishlist/${params.id}`, {
+      .get(`http://localhost:5000/wishlist/${params.id}`, {
         withCredentials: true,
       })
       .then((response) => {
@@ -31,7 +31,7 @@ const WishList = () => {
 
   const handleRemoveFromWishlist = async (blogId) => {
     try {
-      await axios.delete("https://blog-website-server-side.vercel.app/wishlist", {
+      await axios.delete("http://localhost:5000/wishlist", {
         data: {
           userEmail: user?.email,
           blogId,

@@ -24,7 +24,7 @@ const UpdateBlogPage = () => {
     const fetchBlogData = async () => {
       try {
         const res = await axios.get(
-          `https://blog-website-server-side.vercel.app/blogs/${params.id}`,
+          `http://localhost:5000/blogs/${params.id}`,
           {
             withCredentials: true,
           }
@@ -57,7 +57,7 @@ const UpdateBlogPage = () => {
     setLoading(true);
     try {
       const res = await axios.put(
-        `https://blog-website-server-side.vercel.app/blogs/${params.id}`,
+        `http://localhost:5000/blogs/${params.id}`,
         updatedData
       );
       Swal.fire("Success", "Blog updated successfully", "success");
