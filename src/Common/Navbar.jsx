@@ -7,6 +7,18 @@ import { motion } from "framer-motion";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
@@ -28,7 +40,11 @@ const Navbar = () => {
             `px-4 py-2 rounded-lg ${
               isActive
                 ? "bg-btn1 text-white font-semibold"
-                : "text-gray-500 lg:text-gray-400 "
+                : ` ${
+                    isScrolled
+                      ? "text-gray-500 lg:text-gray-700 "
+                      : "text-gray-500 lg:text-gray-500 "
+                  }`
             }`
           }
         >
@@ -42,7 +58,11 @@ const Navbar = () => {
             `px-4 py-2 rounded-lg ${
               isActive
                 ? "bg-btn1 text-white font-semibold"
-                : "text-gray-500 lg:text-gray-400 "
+                : ` ${
+                    isScrolled
+                      ? "text-gray-500 lg:text-gray-700 "
+                      : "text-gray-500 lg:text-gray-500 "
+                  }`
             }`
           }
         >
@@ -56,7 +76,11 @@ const Navbar = () => {
             `px-4 py-2 rounded-lg  ${
               isActive
                 ? "bg-btn1 text-white font-semibold"
-                : "text-gray-500 lg:text-gray-400 "
+                : ` ${
+                    isScrolled
+                      ? "text-gray-500 lg:text-gray-700 "
+                      : "text-gray-500 lg:text-gray-500 "
+                  }`
             }`
           }
         >
@@ -70,7 +94,11 @@ const Navbar = () => {
             `px-4 py-2 rounded-lg ${
               isActive
                 ? "bg-btn1 text-white font-semibold"
-                : "text-gray-500 lg:text-gray-400 "
+                : ` ${
+                    isScrolled
+                      ? "text-gray-500 lg:text-gray-700 "
+                      : "text-gray-500 lg:text-gray-500 "
+                  }`
             }`
           }
         >
@@ -85,7 +113,11 @@ const Navbar = () => {
               `px-4 py-2 rounded-lg ${
                 isActive
                   ? "bg-btn1 text-white font-semibold"
-                  : "text-gray-500 lg:text-gray-400 "
+                  : ` ${
+                      isScrolled
+                        ? "text-gray-500 lg:text-gray-700 "
+                        : "text-gray-500 lg:text-gray-500 "
+                    }`
               }`
             }
           >
@@ -99,7 +131,12 @@ const Navbar = () => {
     <motion.div
       animate={{ y: [-100, 0] }}
       transition={{ duration: 2 }}
-      className=" bg-base-content sticky top-0 z-10 text-base-300 font-poppins py-2 lg:px-10 "
+      // className=" bg-base-content    "
+      className={`fixed top-0 w-full font-poppins py-2 lg:px-10  transition-all duration-300 z-10 ${
+        isScrolled
+          ? "bg-white bg-opacity-50 backdrop-blur-md text-base-content"
+          : "bg-base-content"
+      }`}
     >
       <div className="navbar container mx-auto">
         <div className="navbar-start">
@@ -116,10 +153,18 @@ const Navbar = () => {
           </div>
           <Link
             to="/"
-            className=" text-2xl md:text-3xl font-bold text-white font-inter"
+            // className=" text-2xl md:text-3xl font-bold text-white font-inter"
+            className={`text-2xl md:text-3xl font-bold text-white font-inter ${
+              isScrolled ? "text-base-content" : "text-white"
+            }`}
           >
             Blog Website
           </Link>
+        </div>
+        <div className="flex justify-center ">
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu-horizontal px-1 gap-4">{Links}</ul>
+          </div>
         </div>
 
         <div className="navbar-end">
@@ -139,6 +184,7 @@ const Navbar = () => {
                   title={user.displayName}
                 />
               </div>
+
               {isProfileOpen && (
                 <div
                   className={`absolute top-28 w-72 py-4 rounded-xl right-2 bg-white px-6  z-10 shadow-md  transform transition-transform duration-300 ease-in-out ${
@@ -188,11 +234,6 @@ const Navbar = () => {
               </Link>
             </>
           )}
-        </div>
-      </div>
-      <div className="flex justify-center ">
-        <div className="navbar-center hidden lg:flex py-2 pb-6">
-          <ul className="menu-horizontal px-1 gap-4">{Links}</ul>
         </div>
       </div>
     </motion.div>
