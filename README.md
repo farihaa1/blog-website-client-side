@@ -8,12 +8,12 @@ This is a blog website built using a combination of React, Firebase, and Express
 
 ##  Live Site
 
-<div align="center">
+<div align ="center">
   <img width="full" src="https://i.ibb.co.com/FL2kr5v4/website2.png"  />
 </div>
 
 ##  Live Site
-Visit the live application here: [Blog Website](https://blog-site-authentication.web.app)
+Visit the live application here: [Blog Website](https://blog-website-server-side.vercel.app)
 ## client-side code GitHub repository
 Visit the live application here: [Blog Website](https://github.com/programming-hero-web-course2/b10a11-client-side-farihaa1)
 ## server-side code GitHub repository

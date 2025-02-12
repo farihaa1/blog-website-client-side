@@ -9,11 +9,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const RecentBlogs = () => {
   const [recentBlogs, setRecentBlogs] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/recent-blogs")
+    fetch("https://blog-website-server-side.vercel.app/recent-blogs")
       .then((res) => res.json())
       .then((data) => {
         setRecentBlogs(data);
@@ -36,7 +36,7 @@ const RecentBlogs = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/wishlist",
+        "https://blog-website-server-side.vercel.app/wishlist",
         {
           userEmail: user?.email,
           blogId,

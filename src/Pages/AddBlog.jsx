@@ -9,7 +9,7 @@ const AddBlog = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/blogs")
+    fetch("https://blog-website-server-side.vercel.app/blogs")
       .then((res) => res.json())
       .then((data) => setBlog(data));
   }, []);
@@ -49,7 +49,7 @@ const AddBlog = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/blogs",
+        "https://blog-website-server-side.vercel.app/blogs",
         blogData,
         {
           withCredentials: true,

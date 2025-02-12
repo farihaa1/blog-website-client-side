@@ -36,7 +36,7 @@ const [error, setError] = useState('')
 
             axios
               .post(
-                "http://localhost:5000/users",
+                "https://blog-website-server-side.vercel.app/users",
                 newUser
               )
               .then((res) => {

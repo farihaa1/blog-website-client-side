@@ -59,12 +59,12 @@ const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/blogs/${params.id}`),
+          fetch(`https://blog-website-server-side.vercel.app/blogs/${params.id}`),
       },
       {
         path: "/featured-blogs",
         element: <FeaturedBlogs></FeaturedBlogs>,
-        loader: () => fetch("http://localhost:5000/featured-blogs"),
+        loader: () => fetch("https://blog-website-server-side.vercel.app/featured-blogs"),
       },
       {
         path: "/register",
